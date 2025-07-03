@@ -6,7 +6,7 @@ This repository contains a minimal, fully reproducible package that aims to veri
 cross-disciplinary correspondences of the Δ-Kernel master equation.  At the moment
 there are multiple numeric demos and Lean correspondences in varying stages of completeness. The continuous-integration pipeline
 executes all tests (numeric demos + Lean compilation) and fails if any `sorry`
-or несогласованный тег статуса появится.
+or an out-of-sync status tag is detected.
 
 ## Verification status (auto-generated)
 <!-- STATUS-START -->
@@ -86,4 +86,4 @@ MIT – see `LICENSE` for details.
 
 The project contains **numerical demos** and **Lean proofs** for each correspondence.
 The continuous-integration pipeline executes all numeric demos plus a Lean compilation test; it fails if any
-`sorry` or несогласованный тег статуса встретится в коде или YAML. 
+`sorry` or an out-of-sync status tag is found in source or YAML. 
