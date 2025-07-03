@@ -4,10 +4,10 @@
 
 This repository contains a minimal, fully reproducible package that aims to verify
 cross-disciplinary correspondences of the Δ-Kernel master equation.  At the moment
-there are **12 numeric demos** and **10 Lean correspondences**; 5 of the Lean statements
-still use *placeholder* lemmas awaiting full proofs.  The continuous-integration
-pipeline executes **13 tests** (12 numeric + Lean compilation) and fails if any
-`sorry` placeholder appears.
+there are multiple numeric demos and Lean correspondences; some Lean statements still
+use *placeholder* lemmas awaiting full proofs. The continuous-integration pipeline
+executes all tests (numeric demos + Lean compilation) and fails if any `sorry`
+or unsanctioned placeholder appears.
 
 ## Verification status (auto-generated)
 <!-- STATUS-START -->
@@ -69,3 +69,8 @@ See `paper/blueprint.md` for a full schematic. Key paths:
 ## License
 
 MIT – see `LICENSE` for details. 
+
+The project contains **numerical demos** and **Lean proofs** for each correspondence.
+Five Lean statements still rely on *placeholder* lemmas awaiting full proofs.  The continuous-integration
+pipeline executes all numeric demos plus a Lean compilation test; it fails if any
+`sorry` or unsanctioned placeholder is found. 

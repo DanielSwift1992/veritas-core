@@ -52,6 +52,9 @@ python tools/gen_status.py --insert-readme || {
 # Warn if placeholders remain (set STRICT_PLACEHOLDERS=1 to make this fatal)
 PLACEHOLDERS=$(python tools/gen_status.py --json | python -c 'import sys, json; print(json.load(sys.stdin)["lean_placeholders"])')
 if [[ "$PLACEHOLDERS" -ne 0 ]]; then
+  if [[ -n "${CI:-}" && "${STRICT_PLACEHOLDERS:-}" == "" ]]; then
+    export STRICT_PLACEHOLDERS=1
+  fi
   if [[ "${STRICT_PLACEHOLDERS:-0}" -eq 1 ]]; then
     echo "[error] $PLACEHOLDERS placeholder lemmas remain. CI requires 0."
     exit 1
