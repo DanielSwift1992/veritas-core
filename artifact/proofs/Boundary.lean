@@ -3,12 +3,10 @@
 import Mathlib.Tactic
 
 /-!
-Simple topological fact used as non-placeholder: the closed unit interval
-`[0,1]` in ℝ is non-empty.  Although trivial, it is a genuine mathematical
-statement and removes the earlier placeholder.
+Basic topological fact: the closed unit interval `[0,1]` in ℝ is non-empty.
 -/
 
 open Set
 
-lemma boundary_placeholder : (Icc (0 : ℝ) 1).Nonempty := by
+lemma boundary_nonempty : (Icc (0 : ℝ) 1).Nonempty := by
   exact ⟨0, by simp⟩ 

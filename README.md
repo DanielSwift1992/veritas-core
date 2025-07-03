@@ -15,8 +15,8 @@ or unsanctioned placeholder appears.
 | Metric | Count |
 |--------|-------|
 | Lean files (core) | 11 |
-| &nbsp; • completed proofs | 6 |
-| &nbsp; • placeholders | 5 |
+| &nbsp; • completed proofs | 11 |
+| &nbsp; • placeholders | 0 |
 | &nbsp; • with `sorry` | 0 |
 | Python demos verified | 12 |
 | Total pytest tests passed | 13 |
