@@ -12,7 +12,7 @@ GradientDescent:
   demo: true
 Guardian:
   lean: full
-  demo: 'no'
+  demo: 'yes'
 HH_Spike:
   lean: none
   demo: true

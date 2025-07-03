@@ -17,7 +17,7 @@ or an out-of-sync status tag is detected.
 | &nbsp; • completed proofs | 12 |
 | &nbsp; • placeholders | 0 |
 | &nbsp; • with `sorry` | 0 |
-| Python demos verified | 12 |
+| Python demos verified | 13 |
 | Total pytest tests passed | 14 |
 
 | Correspondence | Lean | Demo |
@@ -26,7 +26,7 @@ or an out-of-sync status tag is detected.
 | DeltaKernel | ✅ | - |
 | FokkerPlanck | ✅ | True |
 | GradientDescent | ❌ | True |
-| Guardian | ✅ | ❌ |
+| Guardian | ✅ | ✅ |
 | HH_Spike | ❌ | True |
 | Landauer | ✅ | True |
 | NavierStokes | ❌ | True |
@@ -38,7 +38,7 @@ or an out-of-sync status tag is detected.
 
 ### Attempted falsification (property-based guardian)
 
-*Inside-domain counter-examples*: **0** (CI would fail otherwise)  
+*Inside-domain counter-examples*: **0** (CI would fail otherwise; *200 random C¹ instances per run – override via `$HYPOTHESIS_MAX_EXAMPLES`*)  
 *Outside-domain cases logged*: **0** – see `artifact/disproof/cases_outside.json`.
 
 <!-- STATUS-END -->
