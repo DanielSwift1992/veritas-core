@@ -1,0 +1,41 @@
+# General OS / Editor junk
+.DS_Store
+Thumbs.db
+*.swp
+
+# IDE
+.idea/
+.vscode/
+
+# Python artifacts
+__pycache__/
+*.py[cod]
+*.pyo
+*.egg-info/
+.eggs/
+*.whl
+pip-wheel-metadata/
+
+# pytest cache
+.pytest_cache/
+
+# Virtual environments
+.env
+.venv
+venv/
+
+# Build / dist
+build/
+dist/
+
+# Lean / Lake build artifacts
+**/.lake/
+**/lake-packages/
+*.olean
+*.trace
+
+# Logs
+*.log
+
+# Generated concatenation artifact
+repo_concat.txt 
