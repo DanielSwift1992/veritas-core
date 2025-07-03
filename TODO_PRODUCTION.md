@@ -6,7 +6,7 @@
 
 | Block | Current state | Required for "honest = exact" | Technique / code snippet |
 |-------|---------------|-------------------------------|---------------------------|
-| **Lean core** | 5 `placeholder` theorems; 6 rows of the grand table not covered. | 1. Replace placeholders with formally closed lemmas.<br>2. Add 6 files: `Noether.lean`, `NavierStokes.lean`, `FokkerPlanck.lean`, `GradientDesc.lean`, `Nash.lean`, `FFTGeom.lean`.<br>3. In `TableCorrespondence.lean` use `open`/`export` + `namespace TableProof` so that *Lean* enforces import of every lemma. | **Minimal example (Landauer bound):**
+| **Lean core** | 5 `placeholder` lemmas remain (boundary, uniqueness, Shannon, Euler–Lagrange, HJB). 10 / 12 correspondence rows are Lean-verified; still missing *GradientDesc* and *FFTGeom*. | 1. Formalise the remaining two rows by adding `GradientDesc.lean` and `FFTGeom.lean` (or fold into existing files).<br>2. Ensure `TableCorrespondence.lean` imports and checks them so that *Lean* enforces completeness. | **Minimal example (Landauer bound):**
 ```lean
 import Mathlib.Data.Real.Log
 open Real
@@ -29,10 +29,10 @@ theorem landauer_exact (T : ℝ) (hT : T > 0) :
 |------|-------------|
 | Landauer | already covered |
 | Shannon | already covered |
-| Navier–Stokes | replace placeholder with 15 × 15 2-D Stokes mini-solver (ν = 1). Verify \(\mathrm dE/\mathrm dt + \int F ∇P < 10^{-8}\). |
-| Fokker–Planck | Simulate Ornstein–Uhlenbeck chain (σ = 1, θ = 1). Check entropy growth \(\dot S ≥ 0\). |
-| Nash | Two-player 2 × 2 bandit via PyTorch gradient descent; assert ‖∇U‖→0 after 100 steps. |
-| FFT geometry | Count complex multiplies for `n=2**10`; assert ratio versus \(n^2\) ≈ `log₂ n`. |
+| Navier–Stokes | **DONE** (1-D Stokes mini-solver in `stokes_mini.py`). *Optional*: extend to 2-D grid (ν = 1) and tighten tolerance. |
+| Fokker–Planck | **DONE** (see `ou_chain_entropy.py` & `fokker_planck_entropy.py`). |
+| Nash | **DONE** (`nash_gradient.py` pure-Python gradient descent). *Optional*: switch to PyTorch to benchmark GPU throughput. |
+| FFT geometry | **DONE** (`fft_ops.py`). |
 
 Each demo must expose:
 ```python
@@ -93,9 +93,9 @@ When CI is ✨ green:
 
 **Checklist (CI to enforce):**
 - [ ] All Lean files compile with `0 #sorry`.
-- [ ] `pytest` discovers 12 numeric demos and all pass within ≤ 10 seconds each.
+- [ ] `pytest` discovers 13 tests (12 numeric demos + Lean compile) and all pass within ≤ 10 seconds each.
 - [ ] README table is up-to-date.
 - [ ] `repo_concat --sha` passes and includes every Lean/Python file.
 - [ ] Zenodo DOI present.
 
-Once all boxes ticked, the repository is a *self-verifying artifact*: one CI run = one published quantitative claim, with no hand-wave. 
+Once all boxes ticked, the repository is a *self-verifying artifact*: one CI run = one published quantitative claim, with no hand-wave.

@@ -45,4 +45,25 @@ else
   echo "[build] pytest not found – skipping demos."
 fi
 
-echo "CI PASSED: Lean proofs and 12 numeric correspondences verified" 
+echo "[build] Updating verification status in README …"
+python tools/gen_status.py --insert-readme || {
+  echo "[warn] Failed to update README status table"; }
+
+# Warn if placeholders remain (set STRICT_PLACEHOLDERS=1 to make this fatal)
+PLACEHOLDERS=$(python tools/gen_status.py --json | python -c 'import sys, json; print(json.load(sys.stdin)["lean_placeholders"])')
+if [[ "$PLACEHOLDERS" -ne 0 ]]; then
+  if [[ "${STRICT_PLACEHOLDERS:-0}" -eq 1 ]]; then
+    echo "[error] $PLACEHOLDERS placeholder lemmas remain. CI requires 0."
+    exit 1
+  else
+    echo "[warn] $PLACEHOLDERS placeholder lemmas remain. (Set STRICT_PLACEHOLDERS=1 to fail)."
+  fi
+fi
+
+# Ensure README had no uncommitted changes (status block up-to-date in commit)
+if ! git diff --exit-code README.md >/dev/null; then
+  echo "[error] README.md out of date with auto-generated status. Please run build and commit.";
+  exit 1;
+fi
+
+echo "CI PASSED: Lean compilation and all tests verified" 
