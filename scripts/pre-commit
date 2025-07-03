@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# Local git pre-commit hook: abort commit if build or tests fail.
+# Usage (one time):
+#   chmod +x scripts/pre-commit
+#   ln -sf ../../scripts/pre-commit .git/hooks/pre-commit
+# Now every commit will run ./build.sh before persisting.
+
+set -euo pipefail
+
+echo "[pre-commit] Running local build (skip Lean if not installed)…"
+./build.sh --skip-lean > /dev/null 2>&1 || {
+  echo "[pre-commit] Build failed. Commit aborted." >&2
+  exit 1
+}
+
+echo "[pre-commit] Build succeeded. Proceeding with commit." 
