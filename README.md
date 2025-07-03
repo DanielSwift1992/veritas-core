@@ -86,6 +86,5 @@ See `paper/blueprint.md` for a full schematic. Key paths:
 MIT – see `LICENSE` for details. 
 
 The project contains **numerical demos** and **Lean proofs** for each correspondence.
-Five Lean statements still rely on *placeholder* lemmas awaiting full proofs.  The continuous-integration
-pipeline executes all numeric demos plus a Lean compilation test; it fails if any
-`sorry` or unsanctioned placeholder is found. 
+The continuous-integration pipeline executes all numeric demos plus a Lean compilation test; it fails if any
+`sorry` or не-санкционированный *placeholder* встретится в коде. 
