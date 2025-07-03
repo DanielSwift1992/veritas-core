@@ -39,18 +39,25 @@ fi
 # 2. Run pytest demos
 if command -v pytest &>/dev/null; then
   echo "[build] Running Python/C++ demos via pytest…"
-  pytest -q artifact/tests || {
+  pytest -q artifact/tests artifact/disproof || {
     echo "Tests failed"; exit 1; }
 else
   echo "[build] pytest not found – skipping demos."
 fi
 
+# 3. Run outside-domain counterexample finder (non-fatal)
+if python -m artifact.disproof.find_outside_domain; then
+  echo "[build] Disproof scan completed.";
+else
+  echo "[warn] Disproof scan failed (non-critical).";
+fi
+
 echo "[build] Updating verification status in README …"
-python tools/gen_status.py --insert-readme || {
+python tools/gen_status.py --write-yaml --insert-readme || {
   echo "[warn] Failed to update README status table"; }
 
 # Warn if placeholders remain (set STRICT_PLACEHOLDERS=1 to make this fatal)
-PLACEHOLDERS=$(python tools/gen_status.py --json | python -c 'import sys, json; print(json.load(sys.stdin)["lean_placeholders"])')
+PLACEHOLDERS=$(python tools/gen_status.py --json | python -c 'import sys, json; print(json.load(sys.stdin)["metrics"]["lean_placeholders"])')
 if [[ "$PLACEHOLDERS" -ne 0 ]]; then
   if [[ -n "${CI:-}" && "${STRICT_PLACEHOLDERS:-}" == "" ]]; then
     export STRICT_PLACEHOLDERS=1
@@ -63,9 +70,9 @@ if [[ "$PLACEHOLDERS" -ne 0 ]]; then
   fi
 fi
 
-# Ensure README had no uncommitted changes (status block up-to-date in commit)
-if ! git diff --exit-code README.md >/dev/null; then
-  echo "[error] README.md out of date with auto-generated status. Please run build and commit.";
+# Ensure README and YAML up to date
+if ! git diff --exit-code README.md status.yml >/dev/null; then
+  echo "[error] README.md or status.yml out of date with auto-generated status. Run build and commit.";
   exit 1;
 fi
 

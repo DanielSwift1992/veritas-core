@@ -3,4 +3,6 @@ scipy  # placeholder for future spectral demos
 pytest
 numba  # planned JIT speed-ups
 ruff
-black 
+black
+pyyaml>=6.0
+hypothesis>=6.99 

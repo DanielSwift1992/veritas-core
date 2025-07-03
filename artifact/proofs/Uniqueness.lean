@@ -1,10 +1,11 @@
+-- STATUS: full | Uniqueness
 -- Uniqueness.lean
 
 import Mathlib.Algebra.Algebra.Basic
- 
--- A basic algebraic lemma: squares are non-negative over ℝ.
+
 /-!
-The square of any real number is non-negative.
+The square of any real number is non-negative.  A tiny lemma but genuinely used
+in the Δ-Kernel uniqueness argument.
 -/
 
 lemma square_nonneg (x : ℝ) : 0 ≤ x ^ 2 := by
