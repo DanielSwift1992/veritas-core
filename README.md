@@ -13,8 +13,8 @@ or an out-of-sync status tag is detected.
 
 | Metric | Count |
 |--------|-------|
-| Lean files (core) | 12 |
-| &nbsp; • completed proofs | 12 |
+| Lean files (core) | 11 |
+| &nbsp; • completed proofs | 11 |
 | &nbsp; • placeholders | 0 |
 | &nbsp; • with `sorry` | 0 |
 | Python demos verified | 13 |
@@ -29,7 +29,7 @@ or an out-of-sync status tag is detected.
 | Guardian | ✅ | ✅ |
 | HH_Spike | ❌ | True |
 | Landauer | ✅ | True |
-| NavierStokes | ❌ | True |
+| NavierStokes | ✅ | True |
 | Noether | ✅ | True |
 | PID | ❌ | True |
 | Shannon | ⚠ | True |
@@ -81,7 +81,7 @@ See `paper/blueprint.md` for a full schematic. Key paths:
 | Component | Methodology | Scope | Status |
 |-----------|------------|-------|--------|
 | **Core theorems** | Lean 4 + mathlib | `artifact/proofs/` | ✅ compiles, **0 `#sorry`** |
-| **Numerical demos** | pytest + NumPy | `artifact/code/` | ✅ 12/12 demos pass |
+| **Numerical demos** | pytest + NumPy | `artifact/code/` | ✅ 13/13 demos pass |
 | **External deps** | mathlib, std4, aesop | pulled via `lake` | ⚠️ may include `sorry` in **their own test dirs** – *not compiled in CI* |
 
 > The artifact purposefully separates *formal* Lean proofs from *auxiliary* numeric demonstrations.  CI fails if any `#sorry` appears in `artifact/proofs/`; external library test files are excluded from compilation.  See `build.sh` for the exact guard.

@@ -20,7 +20,7 @@ Landauer:
   lean: full
   demo: true
 NavierStokes:
-  lean: none
+  lean: full
   demo: true
 Noether:
   lean: full
