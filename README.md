@@ -21,6 +21,21 @@ or unsanctioned placeholder appears.
 | Python demos verified | 12 |
 | Total pytest tests passed | 13 |
 
+| Correspondence | Lean | Demo |
+|--------------|------|------|
+| Landauer | ✅ | True |
+| Shannon | ⚠ | True |
+| PID | ❌ | True |
+| GradientDescent | ❌ | True |
+| HH_Spike | ❌ | True |
+| NavierStokes | ❌ | True |
+| FokkerPlanck | ✅ | True |
+| Stokes | ❌ | True |
+| Noether | ✅ | True |
+| DeltaKernel | ✅ | - |
+| Boundary | ✅ | - |
+| Uniqueness | ✅ | - |
+
 <!-- STATUS-END -->
 
 \[

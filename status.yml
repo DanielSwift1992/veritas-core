@@ -1,0 +1,36 @@
+Landauer:
+  lean: full
+  demo: yes
+Shannon:
+  lean: partial
+  demo: yes
+PID:
+  lean: none
+  demo: yes
+GradientDescent:
+  lean: none
+  demo: yes
+HH_Spike:
+  lean: none
+  demo: yes
+NavierStokes:
+  lean: none
+  demo: yes
+FokkerPlanck:
+  lean: full
+  demo: yes
+Stokes:
+  lean: none
+  demo: yes
+Noether:
+  lean: full
+  demo: yes
+DeltaKernel:
+  lean: full
+  demo: '-'
+Boundary:
+  lean: full
+  demo: '-'
+Uniqueness:
+  lean: full
+  demo: '-' 
