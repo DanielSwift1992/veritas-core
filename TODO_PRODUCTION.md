@@ -6,7 +6,7 @@
 
 | Block | Current state | Required for "honest = exact" | Technique / code snippet |
 |-------|---------------|-------------------------------|---------------------------|
-| **Lean core** | 5 `placeholder` lemmas remain (boundary, uniqueness, Shannon, Euler–Lagrange, HJB). 10 / 12 correspondence rows are Lean-verified; still missing *GradientDesc* and *FFTGeom*. | 1. Formalise the remaining two rows by adding `GradientDesc.lean` and `FFTGeom.lean` (or fold into existing files).<br>2. Ensure `TableCorrespondence.lean` imports and checks them so that *Lean* enforces completeness. | **Minimal example (Landauer bound):**
+| **Lean core** | All current core files compile, **0 `#sorry`**. Several correspondences are still marked `partial/none` in `status.yml` (e.g. Shannon, HJB, Navier–Stokes). | 1. Complete the remaining partial proofs (`Shannon`, `EulerLagrange`, etc.).<br>2. Add new files `GradientDesc.lean`, `FFTGeom.lean`, and hook them into `TableCorrespondence`. | **Minimal example (Landauer bound):**
 ```lean
 import Mathlib.Data.Real.Log
 open Real

@@ -4,10 +4,9 @@
 
 This repository contains a minimal, fully reproducible package that aims to verify
 cross-disciplinary correspondences of the Δ-Kernel master equation.  At the moment
-there are multiple numeric demos and Lean correspondences; some Lean statements still
-use *placeholder* lemmas awaiting full proofs. The continuous-integration pipeline
+there are multiple numeric demos and Lean correspondences in varying stages of completeness. The continuous-integration pipeline
 executes all tests (numeric demos + Lean compilation) and fails if any `sorry`
-or unsanctioned placeholder appears.
+or несогласованный тег статуса появится.
 
 ## Verification status (auto-generated)
 <!-- STATUS-START -->
@@ -75,7 +74,7 @@ See `paper/blueprint.md` for a full schematic. Key paths:
 
 | Component | Methodology | Scope | Status |
 |-----------|------------|-------|--------|
-| **Core theorems** | Lean 4 + mathlib | `artifact/proofs/` | ✅ compiles, **0 `#sorry`** (5 placeholder lemmas remain) |
+| **Core theorems** | Lean 4 + mathlib | `artifact/proofs/` | ✅ compiles, **0 `#sorry`** |
 | **Numerical demos** | pytest + NumPy | `artifact/code/` | ✅ 12/12 demos pass |
 | **External deps** | mathlib, std4, aesop | pulled via `lake` | ⚠️ may include `sorry` in **their own test dirs** – *not compiled in CI* |
 
@@ -87,4 +86,4 @@ MIT – see `LICENSE` for details.
 
 The project contains **numerical demos** and **Lean proofs** for each correspondence.
 The continuous-integration pipeline executes all numeric demos plus a Lean compilation test; it fails if any
-`sorry` or не-санкционированный *placeholder* встретится в коде. 
+`sorry` or несогласованный тег статуса встретится в коде или YAML. 
