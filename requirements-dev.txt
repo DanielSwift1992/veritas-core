@@ -1,0 +1,6 @@
+numpy
+scipy  # placeholder for future spectral demos
+pytest
+numba  # planned JIT speed-ups
+ruff
+black 

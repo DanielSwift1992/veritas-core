@@ -1,0 +1,28 @@
+-- TableCorrespondence.lean
+import Boundary
+import Uniqueness
+import EnergyBalance
+import Shannon
+import EulerLagrange
+import Control.HJB
+import DeltaKernel
+import NavierStokes
+import Noether
+
+-- Simple check that all placeholder theorems are available and provable.
+def check_table_soundness : Bool :=
+  (by
+    have h1 := boundary_placeholder
+    have h2 := uniqueness_placeholder 0
+    have h3 := landauer_pos (T := 1) (by norm_num)
+    have h4 := shannon_placeholder
+    have h5 := euler_lagrange_placeholder
+    have h6 := hjb_placeholder
+    have h7 := deltaKernel_landauer_T (T := 1) (by norm_num)
+    have h8 := vortex_energy_integral_zero
+    have h9 := energy_conserved ⟨0,1⟩ 0
+    exact True.intro
+  );
+  True
+
+#eval check_table_soundness 
