@@ -23,17 +23,17 @@ or unsanctioned placeholder appears.
 
 | Correspondence | Lean | Demo |
 |--------------|------|------|
-| Landauer | ✅ | True |
-| Shannon | ⚠ | True |
-| PID | ❌ | True |
+| Boundary | ✅ | - |
+| DeltaKernel | ✅ | - |
+| FokkerPlanck | ✅ | True |
 | GradientDescent | ❌ | True |
 | HH_Spike | ❌ | True |
+| Landauer | ✅ | True |
 | NavierStokes | ❌ | True |
-| FokkerPlanck | ✅ | True |
-| Stokes | ❌ | True |
 | Noether | ✅ | True |
-| DeltaKernel | ✅ | - |
-| Boundary | ✅ | - |
+| PID | ❌ | True |
+| Shannon | ⚠ | True |
+| Stokes | ❌ | True |
 | Uniqueness | ✅ | - |
 
 <!-- STATUS-END -->

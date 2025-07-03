@@ -1,36 +1,36 @@
-Landauer:
-  lean: full
-  demo: yes
-Shannon:
-  lean: partial
-  demo: yes
-PID:
-  lean: none
-  demo: yes
-GradientDescent:
-  lean: none
-  demo: yes
-HH_Spike:
-  lean: none
-  demo: yes
-NavierStokes:
-  lean: none
-  demo: yes
-FokkerPlanck:
-  lean: full
-  demo: yes
-Stokes:
-  lean: none
-  demo: yes
-Noether:
-  lean: full
-  demo: yes
-DeltaKernel:
-  lean: full
-  demo: '-'
 Boundary:
   lean: full
   demo: '-'
+DeltaKernel:
+  lean: full
+  demo: '-'
+FokkerPlanck:
+  lean: full
+  demo: true
+GradientDescent:
+  lean: none
+  demo: true
+HH_Spike:
+  lean: none
+  demo: true
+Landauer:
+  lean: full
+  demo: true
+NavierStokes:
+  lean: none
+  demo: true
+Noether:
+  lean: full
+  demo: true
+PID:
+  lean: none
+  demo: true
+Shannon:
+  lean: partial
+  demo: true
+Stokes:
+  lean: none
+  demo: true
 Uniqueness:
   lean: full
-  demo: '-' 
+  demo: '-'
