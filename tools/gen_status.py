@@ -22,6 +22,9 @@ try:
 except Exception:
     pass
 
-print("## Auto-generated status\n")
-print(f"Lean proofs closed: {len(no_sorry)}/{len(lean_files)}")
-print(f"Python demos passed: {passed}") 
+out = f"Lean proofs closed: {len(no_sorry)}/{len(lean_files)}\nPython demos passed: {passed}\n"
+
+if '--write' in sys.argv:
+    (ROOT / 'STATUS.md').write_text(out)
+else:
+    print(out) 
