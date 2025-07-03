@@ -10,6 +10,9 @@ FokkerPlanck:
 GradientDescent:
   lean: none
   demo: true
+Guardian:
+  lean: full
+  demo: 'no'
 HH_Spike:
   lean: none
   demo: true

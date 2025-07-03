@@ -13,12 +13,12 @@ or an out-of-sync status tag is detected.
 
 | Metric | Count |
 |--------|-------|
-| Lean files (core) | 11 |
-| &nbsp; • completed proofs | 11 |
+| Lean files (core) | 12 |
+| &nbsp; • completed proofs | 12 |
 | &nbsp; • placeholders | 0 |
 | &nbsp; • with `sorry` | 0 |
 | Python demos verified | 12 |
-| Total pytest tests passed | 13 |
+| Total pytest tests passed | 14 |
 
 | Correspondence | Lean | Demo |
 |--------------|------|------|
@@ -26,6 +26,7 @@ or an out-of-sync status tag is detected.
 | DeltaKernel | ✅ | - |
 | FokkerPlanck | ✅ | True |
 | GradientDescent | ❌ | True |
+| Guardian | ✅ | ❌ |
 | HH_Spike | ❌ | True |
 | Landauer | ✅ | True |
 | NavierStokes | ❌ | True |
@@ -34,6 +35,11 @@ or an out-of-sync status tag is detected.
 | Shannon | ⚠ | True |
 | Stokes | ❌ | True |
 | Uniqueness | ✅ | - |
+
+### Attempted falsification (property-based guardian)
+
+*Inside-domain counter-examples*: **0** (CI would fail otherwise)  
+*Outside-domain cases logged*: **0** – see `artifact/disproof/cases_outside.json`.
 
 <!-- STATUS-END -->
 
