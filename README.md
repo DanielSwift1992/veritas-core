@@ -1,6 +1,7 @@
-# Veritas Core – one-command research confidence
+# Veritas – публичный реестр обещаний вашего проекта  
+*(see docs/BRAND.md for canonical wording)*
 
-> **Stop losing hours in dependency hell.** Clone • `veritas env` • `veritas check` → green badge or actionable diff.
+> “Veritas is a public ledger of your project’s promises. Each promise is notarised by an automated check; if all contracts hold you get a green Trust-stamp, otherwise the exact breach is reported instantly.”
 
 # Δ-Kernel Reference Implementation
 
@@ -12,7 +13,7 @@ there are multiple numeric demos and Lean correspondences in varying stages of c
 executes all tests (numeric demos + Lean compilation) and fails if any `sorry`
 or an out-of-sync status tag is detected.
 
-## Verification status (auto-generated)
+## Verification status
 <!-- STATUS-START -->
 
 | Metric | Count |
@@ -21,8 +22,7 @@ or an out-of-sync status tag is detected.
 | &nbsp; • completed proofs | 11 |
 | &nbsp; • placeholders | 0 |
 | &nbsp; • with `sorry` | 0 |
-| Python demos verified | 12 |
-| Total pytest tests passed | 13 |
+| Python demos verified | 10 |
 
 | Correspondence | Lean | Demo |
 |--------------|------|------|
@@ -40,9 +40,10 @@ or an out-of-sync status tag is detected.
 | Stokes | ❌ | ✅ |
 | Uniqueness | ✅ | - |
 
+
 ### Attempted falsification (property-based guardian)
 
-*Inside-domain counter-examples*: **0** (CI would fail otherwise; *200 random C¹ instances per run – override via `$HYPOTHESIS_MAX_EXAMPLES`*)  
+*Inside-domain counter-examples*: **0**  
 *Outside-domain cases logged*: **0** – see `artifact/disproof/cases_outside.json`.
 
 <!-- STATUS-END -->

@@ -1,0 +1,34 @@
+schema: 4
+generated: auto-scan
+nodes:
+- id: artifact__proofs
+  type: evidence
+  boundary: artifact/proofs
+- id: artifact__code
+  type: evidence
+  boundary: artifact/code
+- id: artifact__tests
+  type: evidence
+  boundary: artifact/tests
+- id: paper__Main_md
+  type: evidence
+  boundary: paper/Main.md
+- id: artifact__data
+  type: evidence
+  boundary: artifact/data
+edges:
+- from: artifact__proofs
+  to: artifact__proofs
+  obligation: lean_compile
+- from: artifact__code
+  to: artifact__code
+  obligation: file_exists
+- from: artifact__tests
+  to: artifact__tests
+  obligation: pytest
+- from: paper__Main_md
+  to: paper__Main_md
+  obligation: file_exists
+- from: artifact__data
+  to: artifact__data
+  obligation: file_exists

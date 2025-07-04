@@ -1,4 +1,3 @@
--- STATUS: full | Boundary
 -- Boundary.lean
 
 import Mathlib.Tactic

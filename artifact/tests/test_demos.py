@@ -7,8 +7,11 @@ import json
 
 ROOT = Path(__file__).resolve().parents[2]  # project root
 CODE = ROOT / "artifact" / "code"
-
-# Allow importing demo modules
+# ensure numeric demos package path available for shared constants
+sys.path.append(str(CODE))
+# shared constants after path is on sys.path
+from constants import k_B, PHI, REL_TOL
+# Allow importing demo modules for direct simulate comparison
 sys.path.append(str(CODE / "neuro"))
 from hh_spike import simulate as hh_simulate  # type: ignore
 
@@ -31,7 +34,6 @@ def test_landauer():
     # Choose the smallest float in output (energy value) to avoid picking temperature.
     floats = [float(x) for x in FLOAT_RE.findall(out)]
     val = floats[-1]
-    k_B = 1.380649e-23
     T = 300.0
     expected = k_B * T * math.log(2)
     assert math.isclose(val, expected, rel_tol=0.05), f"Landauer energy off: {val} vs {expected}"
@@ -49,7 +51,7 @@ def test_pid_phi():
     out = _run_py(CODE / "control" / "pid_phi.py")
     nums = FLOAT_RE.findall(out)
     assert len(nums) >= 3, "Could not parse PID ratios"
-    phi_calc = (1 + 5 ** 0.5) / 2
+    phi_calc = PHI
     kp, ki, kd = float(nums[0]), float(nums[1]), float(nums[2])
     assert math.isclose(ki, phi_calc, rel_tol=0.01)
     assert math.isclose(kd, phi_calc ** 2, rel_tol=0.01)
@@ -68,7 +70,7 @@ def test_gd_energy():
         x -= lr * grad_x
         y -= lr * grad_y
     expected = (1 - x) ** 2 + 100 * (y - x ** 2) ** 2
-    assert math.isclose(val, expected, rel_tol=1e-4)
+    assert math.isclose(val, expected, rel_tol=REL_TOL)
     assert val < 5.0  # sanity check, should have decreased considerably
 
 

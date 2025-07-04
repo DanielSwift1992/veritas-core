@@ -1,4 +1,3 @@
--- STATUS: full | Guardian
 -- Guardian.lean : Relates positivity assumption to DeltaKernel non-negativity
 
 import DeltaKernel

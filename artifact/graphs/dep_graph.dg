@@ -1,0 +1,4 @@
+#libdelta 1
+# simple two-node graph that reduces to VOID
+0 -1
+-1 -1 

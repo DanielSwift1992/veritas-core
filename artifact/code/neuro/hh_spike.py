@@ -3,9 +3,12 @@
 Outputs estimated energy (J) dissipated by ionic currents during an action potential
 triggered by a brief current pulse. Designed to run in <1 s for CI."""
 
-import argparse
-import math
-import json, sys
+import argparse, math, sys, json, pathlib
+# ensure constants module importable
+root_code = pathlib.Path(__file__).resolve().parents[1]
+if str(root_code) not in sys.path:
+    sys.path.append(str(root_code))
+from constants import k_B, LN2
 
 # HH parameters (classic squid axon, Hodgkin & Huxley 1952)
 DEFAULTS = {
@@ -124,9 +127,8 @@ def main():
     params["area"] = args.area
     energy_j = simulate(params)
     # Estimate equivalent number of k_B T ln2 bits at 300 K
-    k_B = 1.380649e-23
     T = args.temp
-    bits = energy_j / (k_B * T * math.log(2))
+    bits = energy_j / (k_B * T * LN2)
     if args.ci:
         json.dump({"energy": energy_j, "bits": bits}, sys.stdout)
     else:

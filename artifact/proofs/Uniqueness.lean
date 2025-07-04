@@ -1,4 +1,3 @@
--- STATUS: full | Uniqueness
 -- Uniqueness.lean
 
 import Mathlib.Algebra.Algebra.Basic
