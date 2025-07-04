@@ -36,18 +36,7 @@ else
   echo "[build] --skip-lean specified – skipping Lean proofs."
 fi
 
-# 2. Run pytest demos
-if command -v pytest &>/dev/null; then
-  echo "[build] Running Python/C++ demos via pytest…"
-  CORE_DIR="tools/veritas-core"
-  export PYTHONPATH="${PYTHONPATH:+$PYTHONPATH:}$CORE_DIR"
-  pytest -q artifact/tests "$CORE_DIR"/veritas/disproof || {
-    echo "Tests failed"; exit 1; }
-else
-  echo "[build] pytest not found – skipping demos."
-fi
-
-# 3. Run outside-domain counterexample finder (non-fatal)
+# 2. Run outside-domain counterexample finder (non-fatal)
 if python -m veritas.disproof.find_outside_domain; then
   echo "[build] Disproof scan completed.";
 else
@@ -72,6 +61,9 @@ if [[ "$PLACEHOLDERS" -ne 0 ]]; then
     echo "[warn] $PLACEHOLDERS placeholder lemmas remain. (Set STRICT_PLACEHOLDERS=1 to fail)."
   fi
 fi
+
+# 2bis. Run new engine-based checks (pytest, schema, etc.)
+veritas check --markdown || exit 1
 
 # Ensure README and YAML up to date
 if ! git diff --exit-code README.md status.yml >/dev/null; then
