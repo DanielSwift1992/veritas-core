@@ -48,7 +48,7 @@ else
 fi
 
 # 3. Run outside-domain counterexample finder (non-fatal)
-if python -m artifact.disproof.find_outside_domain; then
+if python -m veritas.disproof.find_outside_domain; then
   echo "[build] Disproof scan completed.";
 else
   echo "[warn] Disproof scan failed (non-critical).";
@@ -56,7 +56,7 @@ fi
 
 echo "[build] Updating verification status in README …"
 CORE_DIR="tools/veritas-core"
-python "$CORE_DIR"/veritas/gen_status.py --write-yaml --insert-readme || {
+python -m veritas.gen_status --write-yaml --insert-readme || {
   echo "[warn] Failed to update README status table"; }
 
 # Warn if placeholders remain (set STRICT_PLACEHOLDERS=1 to make this fatal)

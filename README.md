@@ -17,8 +17,8 @@ or an out-of-sync status tag is detected.
 | &nbsp; • completed proofs | 11 |
 | &nbsp; • placeholders | 0 |
 | &nbsp; • with `sorry` | 0 |
-| Python demos verified | 13 |
-| Total pytest tests passed | 14 |
+| Python demos verified | 12 |
+| Total pytest tests passed | 13 |
 
 | Correspondence | Lean | Demo |
 |--------------|------|------|
