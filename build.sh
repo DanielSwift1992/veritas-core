@@ -40,7 +40,7 @@ fi
 if command -v pytest &>/dev/null; then
   echo "[build] Running Python/C++ demos via pytest…"
   CORE_DIR="tools/veritas-core"
-  export PYTHONPATH="$PYTHONPATH:$CORE_DIR"
+  export PYTHONPATH="${PYTHONPATH:+$PYTHONPATH:}$CORE_DIR"
   pytest -q artifact/tests "$CORE_DIR"/veritas/disproof || {
     echo "Tests failed"; exit 1; }
 else
