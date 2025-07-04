@@ -2,6 +2,6 @@
 set -euo pipefail
 
 # Single CI entry-point – executes all checks via veritas
-veritas check
+python -m veritas.cli check
 
 echo "CI ✓ – all green" 
