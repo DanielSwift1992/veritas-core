@@ -1,0 +1,4 @@
+[submodule "tools/veritas-core"]
+	path = tools/veritas-core
+	url = git@github.com:DanielSwift1992/veritas-core.git
+	branch = main

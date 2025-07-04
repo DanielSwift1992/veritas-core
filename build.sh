@@ -39,7 +39,9 @@ fi
 # 2. Run pytest demos
 if command -v pytest &>/dev/null; then
   echo "[build] Running Python/C++ demos via pytest…"
-  pytest -q artifact/tests artifact/disproof || {
+  CORE_DIR="tools/veritas-core"
+  export PYTHONPATH="$PYTHONPATH:$CORE_DIR"
+  pytest -q artifact/tests "$CORE_DIR"/disproof || {
     echo "Tests failed"; exit 1; }
 else
   echo "[build] pytest not found – skipping demos."
@@ -53,11 +55,12 @@ else
 fi
 
 echo "[build] Updating verification status in README …"
-python tools/gen_status.py --write-yaml --insert-readme || {
+CORE_DIR="tools/veritas-core"
+python "$CORE_DIR"/gen_status.py --write-yaml --insert-readme || {
   echo "[warn] Failed to update README status table"; }
 
 # Warn if placeholders remain (set STRICT_PLACEHOLDERS=1 to make this fatal)
-PLACEHOLDERS=$(python tools/gen_status.py --json | python -c 'import sys, json; print(json.load(sys.stdin)["metrics"]["lean_placeholders"])')
+PLACEHOLDERS=$(python "$CORE_DIR"/gen_status.py --json | python -c 'import sys, json; print(json.load(sys.stdin)["metrics"]["lean_placeholders"])')
 if [[ "$PLACEHOLDERS" -ne 0 ]]; then
   if [[ -n "${CI:-}" && "${STRICT_PLACEHOLDERS:-}" == "" ]]; then
     export STRICT_PLACEHOLDERS=1
