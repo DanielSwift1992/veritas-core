@@ -44,3 +44,9 @@ edges:
 - from: docs__schema_4_json
   to: docs__schema_4_json
   obligation: file_exists
+- from: artifact__code
+  to: artifact__proofs
+  obligation: guardian_align
+- from: paper__Main_md
+  to: artifact__proofs
+  obligation: cite_consistency

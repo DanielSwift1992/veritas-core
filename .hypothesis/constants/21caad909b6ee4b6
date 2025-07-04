@@ -1,0 +1,4 @@
+# file: /Users/daniilstrizov/Projects/LogicSubstrat/tools/veritas-core/veritas/engine.py
+# hypothesis_version: 6.131.21
+
+['?', 'artifacts', 'assert', 'assert.after', 'assert.before', 'boundaries', 'boundary', 'check', 'check.completed', 'check_name', 'checks_failed', 'checks_passed', 'claim', 'claims', 'cmd', 'details', 'distinctions', 'edges', 'from', 'graph.built', 'id', 'logic-graph.yml', 'name', 'nodes', 'obligation', 'observe', 'ok', 'on', 'path', 'produce', 'shell', 'target', 'to', 'type', 'value', 'whole.lock']

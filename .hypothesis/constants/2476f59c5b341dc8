@@ -1,0 +1,4 @@
+# file: /Users/daniilstrizov/Projects/LogicSubstrat/tools/veritas-core/veritas/cli.py
+# hypothesis_version: 6.131.21
+
+[8192, '*', '--cfg', '--conda', '--debug', '--dest', '--docker/--no-docker', '--quiet', '--readme/--no-readme', '--skip-lean', '.attest.json', 'Generate Dockerfile', 'Insert README block', 'Output archive path', 'README.md', 'Skip Lean proofs', 'Update README', 'Veritas Core CLI', 'Z', '__main__', 'artifact', 'bash', 'boundaries', 'boundary', 'build.sh', 'build.sh not found', 'check', 'checks_failed', 'created', 'distinctions', 'edges', 'evidence', 'files', 'from', 'generated', 'id', 'list-plugins', 'logic-graph.yml', 'module', 'name', 'nodes', 'obligation', 'on', 'output file', 'path', 'platform', 'python', 'rb', 'schema', 'to', 'type', 'veritas.yml', 'w:gz']
