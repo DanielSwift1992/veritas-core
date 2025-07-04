@@ -24,16 +24,16 @@ or an out-of-sync status tag is detected.
 |--------------|------|------|
 | Boundary | ✅ | - |
 | DeltaKernel | ✅ | - |
-| FokkerPlanck | ✅ | True |
-| GradientDescent | ❌ | True |
+| FokkerPlanck | ✅ | ✅ |
+| GradientDescent | ❌ | ✅ |
 | Guardian | ✅ | ✅ |
-| HH_Spike | ❌ | True |
-| Landauer | ✅ | True |
-| NavierStokes | ✅ | True |
-| Noether | ✅ | True |
-| PID | ❌ | True |
-| Shannon | ⚠ | True |
-| Stokes | ❌ | True |
+| HH_Spike | ❌ | ✅ |
+| Landauer | ✅ | ✅ |
+| NavierStokes | ✅ | ✅ |
+| Noether | ✅ | ✅ |
+| PID | ❌ | ✅ |
+| Shannon | ⚠ | ✅ |
+| Stokes | ❌ | ✅ |
 | Uniqueness | ✅ | - |
 
 ### Attempted falsification (property-based guardian)
