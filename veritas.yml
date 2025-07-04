@@ -48,11 +48,14 @@ artifacts:
     claim: core_struct
 
 # core self-check via yaml_schema
+produce: []
+
 assert:
-  - type: yaml_schema
-    target: veritas.yml
-  - type: pytest
-    target: artifact/tests
+  - {type: yaml_schema, target: veritas.yml}
+  - {type: pytest, target: artifact/tests}
+  - {type: lean_compile, target: artifact/proofs}
+
+observe: []
 
 reports:
   - markdown_table: README.md 
