@@ -1,0 +1,30 @@
+meta:
+  schema: 1
+  proof_root: artifact/proofs
+  code_root: artifact/code
+
+# Default checks infer plugin by file extension
+defaults:
+  ".py": python_run  # via pytest plugin in future
+  ".lean": lean_compile
+
+concepts:
+  - Boundary
+  - DeltaKernel
+  - FokkerPlanck
+  - GradientDescent
+  - Guardian
+  - HH_Spike
+  - Landauer
+  - NavierStokes
+  - Noether
+  - PID
+  - Shannon
+  - Stokes
+  - Uniqueness
+
+# Explicit artefacts will be auto-populated by `veritas scan`
+artifacts: []
+
+reports:
+  - markdown_table: README.md 
