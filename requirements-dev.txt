@@ -5,4 +5,5 @@ numba  # planned JIT speed-ups
 ruff
 black
 pyyaml>=6.0
-hypothesis>=6.99 
+hypothesis>=6.99
+networkx>=3.0 
