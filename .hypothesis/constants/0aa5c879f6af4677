@@ -1,4 +1,0 @@
-# file: /Users/daniilstrizov/Projects/LogicSubstrat/veritas_lean/__init__.py
-# hypothesis_version: 6.131.21
-
-['*.lean', '\\bsorry\\b', 'build', 'ignore', 'lake', 'lake not installed', 'lean_compile']

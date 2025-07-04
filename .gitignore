@@ -38,4 +38,9 @@ dist/
 *.log
 
 # Generated concatenation artifact
+repo_concat.txt
+
+# Local hypothesis examples
+.hypothesis/
+# Dev concat file
 repo_concat.txt 

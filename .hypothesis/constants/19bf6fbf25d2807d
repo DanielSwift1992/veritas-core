@@ -1,4 +1,0 @@
-# file: /Users/daniilstrizov/Projects/LogicSubstrat/tools/veritas-core/veritas/plugin.py
-# hypothesis_version: 6.131.21
-
-['*', 'CheckProtocol', 'CheckResult', 'check_name', 'details', 'discover_plugins', 'file not found', 'file_exists', 'file_hash', 'normal', 'ok', 'plugin', 'run', 'schema', 'target missing', 'verbosity_hint', 'veritas_cite', 'veritas_guardian', 'veritas_lean', 'veritas_plugins', 'veritas_pytest', 'yaml_schema']

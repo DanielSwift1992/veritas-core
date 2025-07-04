@@ -1,4 +1,0 @@
-# file: /Users/daniilstrizov/Projects/LogicSubstrat/artifact/code/neuro/hh_spike.py
-# hypothesis_version: 6.132.0
-
-[-77.0, -65.0, -54.387, 0.0, 1.380649e-23, 1e-06, 0.0001, 0.001, 0.01, 0.025, 0.07, 0.1, 0.125, 0.3, 1.0, 4.0, 5.0, 6.0, 10.0, 36.0, 50.0, 120.0, 300.0, '--area', '--ci', '--pulse', '--temp', 'C_M', 'E_K', 'E_L', 'E_NA', 'G_K', 'G_L', 'G_NA', 'Patch area cm^2', '__main__', 'area', 'bits', 'dt', 'energy', 'pulse_amp', 'pulse_end', 'pulse_start', 'store_true', 't_max', 'temp', 'test-runner flag']
