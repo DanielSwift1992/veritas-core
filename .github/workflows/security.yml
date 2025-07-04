@@ -1,0 +1,54 @@
+name: Security
+
+on:
+  push:
+    branches: [ master ]
+  schedule:
+    - cron: '0 4 * * 1'  # weekly security scan
+
+jobs:
+  sbom:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install deps
+        run: |
+          pip install -e tools/veritas-core
+          pip install -e veritas_pytest
+          pip install cyclonedx-bom
+      - name: Generate SBOM
+        run: |
+          cyclonedx-py -e -o sbom.json
+      - name: Upload SBOM
+        uses: actions/upload-artifact@v4
+        with:
+          name: sbom
+          path: sbom.json
+
+  sign-release:
+    if: github.event_name == 'release'
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write  # required for sigstore
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Ensure tarball
+        run: tar -czf veritas_demo.tar.gz $(git ls-files)
+      - name: Sign with cosign
+        env:
+          COSIGN_EXPERIMENTAL: '1'
+        run: |
+          curl -sSfL https://github.com/sigstore/cosign/releases/download/v2.1.1/cosign-linux-amd64 -o cosign && chmod +x cosign
+          ./cosign generate-key-pair --kms "gcpkms://projects/$GCP_PROJECT/..." || echo "Using keyless"
+          ./cosign sign --yes --output-signature veritas_demo.tar.gz.sig veritas_demo.tar.gz
+      - name: Upload assets
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            veritas_demo.tar.gz
+            veritas_demo.tar.gz.sig 
