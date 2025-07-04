@@ -1,3 +1,7 @@
+# Veritas Core – one-command research confidence
+
+> **Stop losing hours in dependency hell.** Clone • `veritas env` • `veritas check` → green badge or actionable diff.
+
 # Δ-Kernel Reference Implementation
 
 ![CI](https://github.com/logicflow/delta/actions/workflows/ci.yml/badge.svg)
