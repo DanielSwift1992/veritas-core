@@ -16,6 +16,9 @@ nodes:
 - id: artifact__data
   type: evidence
   boundary: artifact/data
+- id: docs__PHILOSOPHY_md
+  type: evidence
+  boundary: docs/PHILOSOPHY.md
 edges:
 - from: artifact__proofs
   to: artifact__proofs
@@ -31,4 +34,7 @@ edges:
   obligation: file_exists
 - from: artifact__data
   to: artifact__data
+  obligation: file_exists
+- from: docs__PHILOSOPHY_md
+  to: docs__PHILOSOPHY_md
   obligation: file_exists

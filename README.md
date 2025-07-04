@@ -1,5 +1,5 @@
 # Veritas – публичный реестр обещаний вашего проекта  
-*(see docs/BRAND.md for canonical wording; schema spec → docs/SPEC.md)*
+*(see docs/BRAND.md for canonical wording; philosophy → docs/PHILOSOPHY.md; schema spec → docs/SPEC.md)*
 
 > “Veritas is a public ledger of your project's promises. Each promise is notarised by an automated check; if all contracts hold you get a green Trust-stamp, otherwise the exact breach is reported instantly.”
 
@@ -47,6 +47,22 @@ or an out-of-sync status tag is detected.
 *Outside-domain cases logged*: **0** – see `artifact/disproof/cases_outside.json`.
 
 <!-- STATUS-END -->
+
+## TL;DR – Why Veritas exists
+
+Veritas treats *knowledge decay* like **entropy**. Every contract your repository
+makes (tests, proofs, data hashes) is declared once in `logic-graph.yml`.
+One command –
+
+```bash
+veritas check
+```
+
+– atomically measures those promises. If **all** obligations pass you receive a
+green **Trust-stamp** (`whole.lock` – 12-char SHA-256). Any broken promise turns the
+badge red and the hash changes, signalling increased entropy.
+
+Want the deeper story? See **docs/PHILOSOPHY.md → "Анти-энтропийный двигатель"**.
 
 \[
 E = \int_{M} F \cdot \nabla P\, dM.
