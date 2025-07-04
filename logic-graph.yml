@@ -22,6 +22,9 @@ nodes:
 - id: docs__schema_4_json
   type: evidence
   boundary: docs/schema-4.json
+- id: logic_graph_yml
+  type: evidence
+  boundary: logic-graph.yml
 edges:
 - from: artifact__proofs
   to: artifact__proofs
@@ -44,6 +47,9 @@ edges:
 - from: docs__schema_4_json
   to: docs__schema_4_json
   obligation: file_exists
+- from: logic_graph_yml
+  to: docs__schema_4_json
+  obligation: yaml_schema
 - from: artifact__code
   to: artifact__proofs
   obligation: guardian_align
