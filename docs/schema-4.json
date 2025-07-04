@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Veritas logic-graph schema-4",
+  "type": "object",
+  "required": ["schema", "nodes", "edges"],
+  "properties": {
+    "schema": { "const": 4 },
+    "generated": { "type": "string" },
+    "nodes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "type"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[A-Za-z0-9_./-]+$" },
+          "type": { "enum": ["evidence", "claim", "contract"] },
+          "boundary": { "type": "string" },
+          "meta": { "type": "object" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "edges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["from", "to", "obligation"],
+        "properties": {
+          "from": { "type": "string" },
+          "to": { "type": "string" },
+          "obligation": { "type": "string" },
+          "meta": { "type": "object" }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+} 

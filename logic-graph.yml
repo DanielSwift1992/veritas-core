@@ -19,6 +19,9 @@ nodes:
 - id: docs__PHILOSOPHY_md
   type: evidence
   boundary: docs/PHILOSOPHY.md
+- id: docs__schema_4_json
+  type: evidence
+  boundary: docs/schema-4.json
 edges:
 - from: artifact__proofs
   to: artifact__proofs
@@ -37,4 +40,7 @@ edges:
   obligation: file_exists
 - from: docs__PHILOSOPHY_md
   to: docs__PHILOSOPHY_md
+  obligation: file_exists
+- from: docs__schema_4_json
+  to: docs__schema_4_json
   obligation: file_exists

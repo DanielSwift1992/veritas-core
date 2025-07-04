@@ -2,6 +2,9 @@
 
 > Status: **Draft / v0.1** – minimal guarantees sufficient for the reference Δ-Kernel demo.  
 > Approved by: core maintainers on 2025-07-04.  
+> Status: **Stable / v1.0** – canonical specification used by reference implementation.  
+> JSON-Schema: see `docs/schema-4.json`.  
+> Approved by: steering committee, 2025-07-10.  
 > See also: `docs/BRAND.md`, `docs/CHEATSHEET.md`, `docs/PLAN_NEXT.md`.
 
 ---
