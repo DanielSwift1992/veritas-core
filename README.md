@@ -1,7 +1,7 @@
 # Veritas – публичный реестр обещаний вашего проекта  
-*(see docs/BRAND.md for canonical wording)*
+*(see docs/BRAND.md for canonical wording; schema spec → docs/SPEC.md)*
 
-> “Veritas is a public ledger of your project’s promises. Each promise is notarised by an automated check; if all contracts hold you get a green Trust-stamp, otherwise the exact breach is reported instantly.”
+> “Veritas is a public ledger of your project's promises. Each promise is notarised by an automated check; if all contracts hold you get a green Trust-stamp, otherwise the exact breach is reported instantly.”
 
 # Δ-Kernel Reference Implementation
 
