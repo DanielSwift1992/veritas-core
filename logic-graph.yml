@@ -25,6 +25,9 @@ nodes:
 - id: logic_graph_yml
   type: evidence
   boundary: logic-graph.yml
+- id: paper__Formulas_md
+  type: evidence
+  boundary: paper/Formulas.md
 edges:
 - from: artifact__proofs
   to: artifact__proofs
@@ -56,3 +59,6 @@ edges:
 - from: paper__Main_md
   to: artifact__proofs
   obligation: cite_consistency
+- from: paper__Formulas_md
+  to: paper__Formulas_md
+  obligation: markdown_nonempty

@@ -3,14 +3,14 @@
 from __future__ import annotations
 
 import pathlib, subprocess, re
-from veritas.plugin import plugin, CheckResult
+from veritas.plugin import BaseCheck, CheckResult
 
 
-@plugin("lean_compile")  # type: ignore[misc]
-class _LeanCompile:  # noqa: D401
+class LeanCompile(BaseCheck):
     """Run `lake build` and ensure no `sorry` in Lean sources."""
+    obligation = "lean_compile"
 
-    def run(self, artifact: pathlib.Path, **kw):  # type: ignore[override]
+    def run(self, artifact: pathlib.Path, **kw):
         proofs_dir = artifact if artifact.is_dir() else artifact.parent
         try:
             subprocess.check_output(["lake", "build"], cwd=proofs_dir, stderr=subprocess.STDOUT)
@@ -21,6 +21,8 @@ class _LeanCompile:  # noqa: D401
 
         # Abort if any `sorry` left (exclude lake-packages)
         for lf in proofs_dir.glob("*.lean"):
+            if "lake-packages" in lf.parts:
+                continue
             if re.search(r"\bsorry\b", lf.read_text()):
                 return CheckResult.failed(f"found sorry in {lf}")
         return CheckResult.passed() 

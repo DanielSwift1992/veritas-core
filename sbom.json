@@ -13737,8 +13737,22 @@
       "version": "0.34.0"
     },
     {
-      "bom-ref": "veritas-core==0.0.0.dev0",
-      "description": "Minimal reproducible research core utilities",
+      "bom-ref": "veritas-cite==0.1.0",
+      "description": "Veritas plugin: cite_consistency obligation",
+      "externalReferences": [
+        {
+          "comment": "PackageSource: Local",
+          "type": "distribution",
+          "url": "file:///Users/daniilstrizov/Projects/LogicSubstrat/veritas_cite"
+        }
+      ],
+      "name": "veritas-cite",
+      "type": "library",
+      "version": "0.1.0"
+    },
+    {
+      "bom-ref": "veritas-core==0.1.0",
+      "description": "Veritas core engine and CLI (local repo)",
       "externalReferences": [
         {
           "comment": "PackageSource: Local",
@@ -13756,7 +13770,63 @@
       ],
       "name": "veritas-core",
       "type": "library",
-      "version": "0.0.0.dev0"
+      "version": "0.1.0"
+    },
+    {
+      "bom-ref": "veritas-guardian==0.1.0",
+      "description": "Veritas plugin: guardian_align obligation",
+      "externalReferences": [
+        {
+          "comment": "PackageSource: Local",
+          "type": "distribution",
+          "url": "file:///Users/daniilstrizov/Projects/LogicSubstrat/veritas_guardian"
+        }
+      ],
+      "name": "veritas-guardian",
+      "type": "library",
+      "version": "0.1.0"
+    },
+    {
+      "bom-ref": "veritas-lean==0.1.0",
+      "description": "Veritas plugin: lean_compile obligation",
+      "externalReferences": [
+        {
+          "comment": "PackageSource: Local",
+          "type": "distribution",
+          "url": "file:///Users/daniilstrizov/Projects/LogicSubstrat/veritas_lean"
+        }
+      ],
+      "name": "veritas-lean",
+      "type": "library",
+      "version": "0.1.0"
+    },
+    {
+      "bom-ref": "veritas-markdown==0.1.0",
+      "description": "Veritas plugin: markdown_nonempty obligation",
+      "externalReferences": [
+        {
+          "comment": "PackageSource: Local",
+          "type": "distribution",
+          "url": "file:///Users/daniilstrizov/Projects/LogicSubstrat/veritas_markdown"
+        }
+      ],
+      "name": "veritas-markdown",
+      "type": "library",
+      "version": "0.1.0"
+    },
+    {
+      "bom-ref": "veritas-pytest==0.1.0",
+      "description": "Veritas plugin: pytest obligation",
+      "externalReferences": [
+        {
+          "comment": "PackageSource: Local",
+          "type": "distribution",
+          "url": "file:///Users/daniilstrizov/Projects/LogicSubstrat/veritas_pytest"
+        }
+      ],
+      "name": "veritas-pytest",
+      "type": "library",
+      "version": "0.1.0"
     },
     {
       "bom-ref": "virtualenv==20.31.2",
@@ -17576,12 +17646,40 @@
       "ref": "uvicorn==0.34.0"
     },
     {
+      "ref": "veritas-cite==0.1.0"
+    },
+    {
       "dependsOn": [
         "PyYAML==6.0.2",
+        "networkx==3.4.2",
         "rich==13.9.4",
-        "typer==0.15.2"
+        "typer==0.15.2",
+        "veritas-cite==0.1.0",
+        "veritas-guardian==0.1.0",
+        "veritas-lean==0.1.0",
+        "veritas-markdown==0.1.0",
+        "veritas-pytest==0.1.0"
       ],
-      "ref": "veritas-core==0.0.0.dev0"
+      "ref": "veritas-core==0.1.0"
+    },
+    {
+      "dependsOn": [
+        "hypothesis==6.131.21",
+        "numpy==1.26.0"
+      ],
+      "ref": "veritas-guardian==0.1.0"
+    },
+    {
+      "ref": "veritas-lean==0.1.0"
+    },
+    {
+      "ref": "veritas-markdown==0.1.0"
+    },
+    {
+      "dependsOn": [
+        "pytest==8.3.4"
+      ],
+      "ref": "veritas-pytest==0.1.0"
     },
     {
       "dependsOn": [
@@ -17691,7 +17789,7 @@
     }
   ],
   "metadata": {
-    "timestamp": "2025-07-04T23:35:44.154841+00:00",
+    "timestamp": "2025-07-05T01:20:39.122857+00:00",
     "tools": {
       "components": [
         {
@@ -17795,7 +17893,7 @@
       ]
     }
   },
-  "serialNumber": "urn:uuid:0808ba04-1423-417f-9d17-2c2264b302ae",
+  "serialNumber": "urn:uuid:3e4e3513-1154-44e1-8bfb-b32cb19472f5",
   "version": 1,
   "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
   "bomFormat": "CycloneDX",

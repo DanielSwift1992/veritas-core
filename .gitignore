@@ -43,4 +43,7 @@ repo_concat.txt
 # Local hypothesis examples
 .hypothesis/
 # Dev concat file
-repo_concat.txt 
+repo_concat.txt
+
+# Ignore plugin build artifacts
+*.egg-info/ 

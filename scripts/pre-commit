@@ -13,4 +13,10 @@ echo "[pre-commit] Running local build (skip Lean if not installed)…"
   exit 1
 }
 
+# Abort if README.md or whole.lock changed but not staged
+if ! git diff --quiet -- README.md whole.lock; then
+  echo "[pre-commit] README.md or whole.lock modified by build. Please 'git add' them and re-commit." >&2
+  exit 1
+fi
+
 echo "[pre-commit] Build succeeded. Proceeding with commit." 

@@ -6,14 +6,14 @@ Installed as extra; in demo repository bundled as source tree.
 from __future__ import annotations
 
 import pathlib, subprocess, sys
-from veritas.plugin import plugin, CheckResult
+from veritas.plugin import BaseCheck, CheckResult
 
 
-@plugin("pytest")  # type: ignore[misc]
-class _PytestPlugin:  # noqa: D401
+class PytestPlugin(BaseCheck):
+    obligation = "pytest"
+
     """Run pytest on the given directory or single test file."""
-
-    def run(self, artifact: pathlib.Path, **kw):  # type: ignore[override]
+    def run(self, artifact: pathlib.Path, **kw):
         target = artifact if artifact.is_dir() else artifact.parent
         cmd = [sys.executable, "-m", "pytest", "-q", str(target)]
         try:

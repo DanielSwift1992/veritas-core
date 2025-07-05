@@ -1,7 +1,7 @@
 # Veritas – публичный реестр обещаний вашего проекта  
 *(see docs/BRAND.md for canonical wording; philosophy → docs/PHILOSOPHY.md; schema spec → docs/SPEC.md)*
 
-> “Veritas is a public ledger of your project's promises. Each promise is notarised by an automated check; if all contracts hold you get a green Trust-stamp, otherwise the exact breach is reported instantly.”
+> "Veritas is a public ledger of your project's promises. Each promise is notarised by an automated check; if all contracts hold you get a green Trust-stamp, otherwise the exact breach is reported instantly."
 
 # Δ-Kernel Reference Implementation
 
@@ -87,6 +87,16 @@ A successful run prints the CI banner below, indicating that both Lean proofs an
 ```
 CI PASSED: Lean compilation and all tests verified
 ```
+
+## External binaries
+
+Some checks rely on external tools:
+
+| Tool | Purpose | Install (macOS/Linux) |
+|------|---------|-----------------------|
+| Lean toolchain (`lake`, `elan`) | Compiles Lean proofs (`lean_compile` plugin) | `curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf \| sh` |
+
+`veritas check` will gracefully skip Lean proofs if `lake` is not found, but CI expects it, so run the installer once.
 
 ## Directory map
 
