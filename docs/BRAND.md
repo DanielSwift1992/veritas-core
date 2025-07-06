@@ -1,24 +1,12 @@
 # Veritas — Brand Core
 
-> RU elevator pitch
+> Elevator pitch
 >
-> «Veritas — это публичный реестр обещаний вашего проекта.  Каждое обещание заверено роботом-нотариусом; если все контракты соблюдены — получаете зелёную печать доверия (`Whole-stamp`), иначе мгновенно видите точку разрыва.»
->
-> EN elevator pitch
->
-> “Veritas is a public ledger of your project’s promises.  Each promise is notarised by an automated check; if all contracts hold you get a green `Whole-stamp`, otherwise the exact breach is reported instantly.”
+> “Veritas is a public ledger of your project's promises. Each promise is notarised by an automated check; when every contract holds you get a green `Whole-stamp`, otherwise the exact breach is reported instantly.”
 
 ---
 
 ## Three role-specific taglines
-
-| Role (RU)  | Tagline |
-|------------|---------|
-| Индивид    | «Мои файлы держат слово сами» |
-| Команда    | «Каждая зависимость — явное обещание, а не скрытый долг» |
-| CEO        | «Бюджет превращается в меряемые обещания с криптопечатью доверия» |
-
-English equivalents:
 
 | Role  | Tagline |
 |-------|---------|
@@ -28,23 +16,21 @@ English equivalents:
 
 ---
 
-## Glossary K-P-S
+## Glossary N-E-C (Node • Edge • Check)
 
-| Symbol | Word (RU/EN) | Definition |
-|--------|--------------|------------|
-| **К**  | Кто / *Party* | Узел-объект, способный обещать: файл, сервис, KPI. |
-| **П**  | По-обещал / *Promise* | Направленное ребро *from → to* + `obligation`. |
-| **С**  | Свидетель / *Check*   | Плагин-нотариус, который подтверждает/опровергает обещание. |
-| Whole-stamp | Печать доверия / *Trust-stamp* | SHA-256 хэш согласованного DAG без циклов и разрывов. |
+| Symbol | Term | Definition |
+|--------|------|------------|
+| **N**  | *Node*              | Evidence or claim boundary: file, dataset, KPI. |
+| **E**  | *Edge*              | A directed link *from → to* that declares an `obligation`. |
+| **C**  | *Check*             | The plugin that validates (or falsifies) the obligation. |
+| Whole-stamp | *Trust-stamp*  | The SHA-256 hash of the acyclic, gap-free DAG. |
 
 ---
 
 ## Tone of voice
 
-* Minimalist — избегаем jargon overflow.
-* Гуманитарные аналоги (нотариус, обещание) рядом с техническими (plugin, obligation).
-* «Порог 5 минут» — ключевой маркетинговый факт, упоминается в каждом публичном тексте.
+* Minimalist — avoid jargon overflow.
+* Human-friendly metaphors (notary, promise) sit next to technical terms (plugin, obligation).
+* “Five-minute hurdle” — core marketing fact, referenced in every public text.
 
----
-
-*(Этот файл — единственный источник истины для формулировок; README, cheatsheet и сайт должны ссылаться на него.)* 
+*(This file is the single source of truth for wording; README, cheatsheet and website must link back to it.)* 

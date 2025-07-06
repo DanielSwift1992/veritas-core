@@ -1,0 +1,47 @@
+[build-system]
+requires = [ "setuptools>=61",]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "veritas-core"
+dynamic = ["version"]
+description = "Immutable kernel + vertex orchestrator for Veritas – minimal, self-verifying core."
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{name = "Delta Kernel Team"}]
+dependencies = [
+    "pyyaml>=6.0",
+    "networkx>=3.0",
+    "typer>=0.9",
+    "rich>=13.0"
+]
+
+[project.license]
+text = "MIT"
+
+[project.scripts]
+veritas = "veritas.vertex.cli:app"
+
+[project.optional-dependencies]
+plugins = [
+    "veritas-pytest",
+    "veritas-lean",
+    "veritas-guardian",
+    "veritas-cite",
+    "veritas-markdown"
+]
+
+stats = ["networkx>=3"]
+templ = ["jinja2>=3"]
+cli = ["typer>=0.9", "rich>=13"]
+test = ["typer>=0.9", "rich>=13", "networkx>=3", "pytest", "typer"]
+
+[project.entry-points."veritas_plugins"]
+file_exists = "veritas.vertex.plugins.file_exists:FileExists"
+markdown_nonempty = "veritas.vertex.plugins.markdown_nonempty:MarkdownNonEmpty"
+yaml_schema = "veritas.vertex.plugins.yaml_schema:YamlSchema"
+file_hash = "veritas.vertex.plugins.file_hash:FileHash"
+
+[tool.setuptools.packages.find]
+where = [ ".",]
+include = [ "veritas*",]

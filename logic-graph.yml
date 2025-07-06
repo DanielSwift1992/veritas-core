@@ -1,64 +1,28 @@
 schema: 4
-generated: auto-scan
 nodes:
-- id: artifact__proofs
-  type: evidence
-  boundary: artifact/proofs
-- id: artifact__code
-  type: evidence
-  boundary: artifact/code
-- id: artifact__tests
-  type: evidence
-  boundary: artifact/tests
-- id: paper__Main_md
-  type: evidence
-  boundary: paper/Main.md
-- id: artifact__data
-  type: evidence
-  boundary: artifact/data
-- id: docs__PHILOSOPHY_md
-  type: evidence
-  boundary: docs/PHILOSOPHY.md
-- id: docs__schema_4_json
-  type: evidence
-  boundary: docs/schema-4.json
-- id: logic_graph_yml
-  type: evidence
-  boundary: logic-graph.yml
-- id: paper__Formulas_md
-  type: evidence
-  boundary: paper/Formulas.md
+  - id: core_pkg
+    type: evidence
+    boundary: veritas
+  - id: spec_doc
+    type: evidence
+    boundary: docs/SPEC.md
+  - id: tests_dir
+    type: evidence
+    boundary: tests
 edges:
-- from: artifact__proofs
-  to: artifact__proofs
-  obligation: lean_compile
-- from: artifact__code
-  to: artifact__code
-  obligation: file_exists
-- from: artifact__tests
-  to: artifact__tests
-  obligation: pytest
-- from: paper__Main_md
-  to: paper__Main_md
-  obligation: file_exists
-- from: artifact__data
-  to: artifact__data
-  obligation: file_exists
-- from: docs__PHILOSOPHY_md
-  to: docs__PHILOSOPHY_md
-  obligation: file_exists
-- from: docs__schema_4_json
-  to: docs__schema_4_json
-  obligation: file_exists
-- from: logic_graph_yml
-  to: docs__schema_4_json
-  obligation: yaml_schema
-- from: artifact__code
-  to: artifact__proofs
-  obligation: guardian_align
-- from: paper__Main_md
-  to: artifact__proofs
-  obligation: cite_consistency
-- from: paper__Formulas_md
-  to: paper__Formulas_md
-  obligation: markdown_nonempty
+  - from: core_pkg
+    to: core_pkg
+    obligation: file_exists
+  - from: spec_doc
+    to: spec_doc
+    obligation: yaml_schema
+    meta:
+      schema: docs/schema-4.json
+  - from: tests_dir
+    to: tests_dir
+    obligation: file_exists
+  - from: core_pkg
+    to: core_pkg
+    obligation: file_hash
+    meta:
+      expected: 044fd0b8857582a872ae478669e13df6a2de9b56c8819ffe8aa0cd448ef06e8c

@@ -12,11 +12,11 @@
 ## 1 · Purpose
 
 The file `logic-graph.yml` is the **single source-of-truth** that describes every
-_K-П-С_ contract in a repository:
+N-E-C contract in a repository:
 
-* **K** (Kонтекст) – _nodes_ table – each evidence/claim boundary.
-* **П** (Переход) – _edges_ list – a directed obligation from `from → to`.
-* **С** (Свидетельство) – plugin check that attests the obligation.
+* **N – Node** – the _nodes_ table, each evidence / claim boundary.
+* **E – Edge** – the _edges_ list, a directed obligation `from → to`.
+* **C – Check** – the plugin that attests the obligation.
 
 The core engine consumes this graph (_schema = 4_), executes every obligation
 via a plugin, and produces a **Trust-stamp** if all checks succeed.
