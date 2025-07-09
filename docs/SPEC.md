@@ -51,6 +51,18 @@ edges:    # list<Edge>
 | `obligation`  | str  | ✔︎ | Name of a **check plugin** (e.g. `file_exists`, `pytest`). |
 | `meta`        | dict | – | Arbitrary data passed verbatim to plugin. |
 
+### 2.0 Plugins
+
+Optional list of extra plugin packages to import before discovery.
+
+```yaml
+plugins:
+  - ./my_checks     # local directory containing __init__.py with @plugin decorators
+  - acme-checks     # already installed PyPI distribution
+```
+
+If a string starts with `./` or `../` it is treated as a relative path; otherwise it is imported as-is.
+
 ---
 
 ## 3 · Graph Invariants

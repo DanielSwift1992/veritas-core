@@ -39,3 +39,17 @@ graph TD
 
 ---
 © 2024 The Veritas Project – MIT License
+
+## Adding custom plugins
+Plugins are regular Python packages that expose one or more classes decorated with `@plugin("name")` (see `veritas.vertex.plugin_api.plugin`).
+
+1. Place your package next to the graph *or* install it via pip.
+2. List it in the `plugins:` section of `logic-graph.yml`:
+   ```yaml
+   plugins:
+     - ./my_checks          # local directory, editable import
+     - acme-veritas-checks  # already installed from PyPI
+   ```
+3. Run `veritas check` — the engine will `import my_checks` before discovering plugins; your obligation names become available immediately.
+
+See `docs/COOKBOOK.md` for plugin skeletons and recipes.
