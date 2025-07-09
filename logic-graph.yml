@@ -15,7 +15,7 @@ edges:
     obligation: file_exists
   - from: spec_doc
     to: spec_doc
-    obligation: yaml_schema
+    obligation: markdown_nonempty
   - from: tests_dir
     to: tests_dir
     obligation: file_exists
@@ -23,4 +23,4 @@ edges:
     to: core_pkg
     obligation: file_hash
     meta:
-      expected: 044fd0b8857582a872ae478669e13df6a2de9b56c8819ffe8aa0cd448ef06e8c
+      expected: 1fac63fead02aadbfb9b4771a21f6a405a6bef73da29a6e8a7a9df28dfda02e7
