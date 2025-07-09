@@ -1,10 +1,10 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "Veritas logic-graph schema-4",
+  "title": "Veritas logic-graph schema-1",
   "type": "object",
   "required": ["schema", "nodes", "edges"],
   "properties": {
-    "schema": { "const": 4 },
+    "schema": { "const": 1 },
     "generated": { "type": "string" },
     "nodes": {
       "type": "array",

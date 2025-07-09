@@ -23,11 +23,17 @@ def analyse(graph, timings: Dict[str, float] | None = None) -> dict:
     kinds = collections.Counter(e["obligation"] for e in graph.edges)
     self_edges = sum(1 for e in graph.edges if e["from"] == e["to"])
     cross_refs = len(graph.edges) - self_edges
+    if G.number_of_nodes() == 0:
+        diameter_val = "∞"
+    elif G.number_of_nodes() == 1:
+        diameter_val = 0
+    else:
+        diameter_val = nx.diameter(G) if nx.is_weakly_connected(G) else "∞"
     stats: dict = {
         "n_nodes": G.number_of_nodes(),
         "n_edges": G.number_of_edges(),
         "density": round(nx.density(G), 3) if G.number_of_nodes() > 1 else 0,
-        "diameter": (nx.diameter(G) if nx.is_weakly_connected(G) and G.number_of_nodes()>1 else "∞"),
+        "diameter": diameter_val,
         "kinds": kinds,
         "self_pct": self_edges / G.number_of_nodes() if G.number_of_nodes() else 1.0,
         "cross_refs": cross_refs,

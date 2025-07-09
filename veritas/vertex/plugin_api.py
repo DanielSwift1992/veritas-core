@@ -77,11 +77,19 @@ def _scan_local_plugins() -> dict[str, type[BaseCheck]]:
 
 
 def discover_plugins() -> dict[str, type[BaseCheck]]:
-    """Return mapping obligation → class via entry-points with local fallback."""
+    """Return mapping obligation → plugin class.
+
+    Precedence:
+    1. Entry-points (installed packages)
+    2. Inline @plugin-decorated classes within current process
+    3. Source-tree modules under ``veritas.vertex.plugins`` (editable install)
+    """
     eps = {ep.name: ep.load() for ep in metadata.entry_points(group="veritas_plugins")}
-    if eps:
-        return eps
-    return _scan_local_plugins()
+    local = _scan_local_plugins()
+    # Inline decorators override nothing deliberately; entry-points win.
+    combined = {**local, **_inline}
+    combined.update(eps)  # entry-points have highest priority
+    return combined
 
 
 _inline: Dict[str, type[BaseCheck]] = {}
@@ -97,9 +105,4 @@ def plugin(name: str):
     def _wrap(cls):
         _inline[name] = cls
         return cls
-    return _wrap
-
-# extend discover_plugins to include decorator-registered classes
-# (entry_points + _BUILTIN + _inline)
-# adjust existing function accordingly
-# after gathering entry_points: 
+    return _wrap 

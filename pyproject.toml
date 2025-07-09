@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "veritas-core"
 dynamic = ["version"]
-description = "Immutable kernel + vertex orchestrator for Veritas – minimal, self-verifying core."
+description = "Veritas — open trust protocol turning any digital promise into a verifiable obligation."
 readme = "README.md"
 requires-python = ">=3.10"
 authors = [{name = "Delta Kernel Team"}]
@@ -25,7 +25,6 @@ veritas = "veritas.vertex.cli:app"
 [project.optional-dependencies]
 plugins = [
     "veritas-pytest",
-    "veritas-lean",
     "veritas-guardian",
     "veritas-cite",
     "veritas-markdown"

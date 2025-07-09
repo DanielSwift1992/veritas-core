@@ -15,7 +15,7 @@ def test_engine_minimal(tmp_path):
     # create minimal graph file
     cfg = tmp_path / "logic-graph.yml"
     cfg.write_text(textwrap.dedent("""
-    schema: 4
+    schema: 1
     nodes:
       - id: a
         type: evidence

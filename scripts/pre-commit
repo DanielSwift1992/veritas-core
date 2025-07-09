@@ -1,22 +1,22 @@
 #!/usr/bin/env bash
-# Local git pre-commit hook: abort commit if build or tests fail.
+# Local git pre-commit hook: abort commit if Veritas self-check fails.
 # Usage (one time):
 #   chmod +x scripts/pre-commit
 #   ln -sf ../../scripts/pre-commit .git/hooks/pre-commit
-# Now every commit will run ./build.sh before persisting.
+# Now every commit will run `veritas check` before persisting.
 
 set -euo pipefail
 
-echo "[pre-commit] Running local build (skip Lean if not installed)…"
-./build.sh --skip-lean > /dev/null 2>&1 || {
-  echo "[pre-commit] Build failed. Commit aborted." >&2
+echo "[pre-commit] Running Veritas self-check (quiet)…"
+veritas check --quiet > /dev/null 2>&1 || {
+  echo "[pre-commit] Veritas checks failed. Commit aborted." >&2
   exit 1
 }
 
 # Abort if README.md or whole.lock changed but not staged
 if ! git diff --quiet -- README.md whole.lock; then
-  echo "[pre-commit] README.md or whole.lock modified by build. Please 'git add' them and re-commit." >&2
+  echo "[pre-commit] README.md or whole.lock modified by veritas. Please 'git add' them and re-commit." >&2
   exit 1
 fi
 
-echo "[pre-commit] Build succeeded. Proceeding with commit." 
+echo "[pre-commit] Veritas OK. Proceeding with commit." 

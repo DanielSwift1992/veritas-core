@@ -1,7 +1,6 @@
 """Veritas Core CLI (MVP)."""
 from __future__ import annotations
-import subprocess, pathlib, sys, contextlib, io
-from typing import Optional
+import pathlib, sys, contextlib, io
 import typer
 from .plugin_api import discover_plugins
 from .env_gen import generate_dockerfile, generate_conda_yaml
@@ -13,25 +12,9 @@ ROOT = pathlib.Path(__file__).resolve()
 while not ((ROOT / "artifact").exists() or (ROOT / "logic-graph.yml").exists()) and ROOT != ROOT.parent:
     ROOT = ROOT.parent
 
-@app.command()
-def run(skip_lean: bool = typer.Option(False, "--skip-lean", help="Skip Lean proofs")) -> None:
-    """[DEPRECATED] Use `veritas check` instead."""
-    typer.secho("[veritas] 'run' is deprecated, use 'check' instead", fg=typer.colors.YELLOW)
-    check(skip_lean=skip_lean)
-
-def _invoke_build(skip_lean: bool) -> None:
-    """Internal helper that still relies on legacy build.sh until full plugin migration."""
-    script = ROOT / "build.sh"
-    if not script.exists():
-        typer.secho("build.sh not found", fg=typer.colors.RED, err=True)
-        raise typer.Exit(1)
-    cmd = ["bash", str(script)] + (["--skip-lean"] if skip_lean else [])
-    raise typer.Exit(subprocess.call(cmd, cwd=ROOT))
-
 # Preferred entry point for CI/local verification
 @app.command()
 def check(
-    skip_lean: bool = typer.Option(False, "--skip-lean", help="Skip Lean proofs"),
     markdown: bool = typer.Option(True, "--markdown/--no-markdown", help="Update README"),
     quiet: bool = typer.Option(False, "--quiet", help="Suppress plugin output, only summary line"),
     debug: bool = typer.Option(False, "--debug", help="Verbose output (no suppression)"),
@@ -45,6 +28,7 @@ def check(
 
     from .engine import run as engine_run
 
+    # skip_lean option removed; no Lean dependency in core
     if quiet and debug:
         typer.secho("--quiet and --debug are mutually exclusive", fg=typer.colors.RED, err=True)
         raise typer.Exit(1)

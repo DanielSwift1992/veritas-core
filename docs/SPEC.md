@@ -1,11 +1,11 @@
-# Veritas Contract Graph – Specification (schema = 4)
+# Veritas Contract Graph – Specification (schema = 1)
 
 > Status: **Draft / v0.1** – minimal guarantees sufficient for the reference Δ-Kernel demo.  
 > Approved by: core maintainers on 2025-07-04.  
 > Status: **Stable / v1.0** – canonical specification used by reference implementation.  
-> JSON-Schema: see `docs/schema-4.json`.  
+> JSON-Schema: see `docs/schema-1.json`.  
 > Approved by: steering committee, 2025-07-10.  
-> See also: `docs/BRAND.md`, `docs/CHEATSHEET.md`, `docs/PLAN_NEXT.md`.
+> See also: `docs/BRAND.md`, `docs/POSITIONING.md`, `docs/PHILOSOPHY.md`.
 
 ---
 
@@ -18,7 +18,7 @@ N-E-C contract in a repository:
 * **E – Edge** – the _edges_ list, a directed obligation `from → to`.
 * **C – Check** – the plugin that attests the obligation.
 
-The core engine consumes this graph (_schema = 4_), executes every obligation
+The core engine consumes this graph (_schema = 1_), executes every obligation
 via a plugin, and produces a **Trust-stamp** if all checks succeed.
 
 ---
@@ -26,7 +26,7 @@ via a plugin, and produces a **Trust-stamp** if all checks succeed.
 ## 2 · Top-level Structure
 
 ```yaml
-schema: 4                 # required – constant 4
+schema: 1                 # required – constant 1
 generated: "2025-07-04T12:34:56Z"  # optional – ISO 8601 timestamp or "auto-scan"
 
 nodes:    # list<Node>
@@ -73,11 +73,11 @@ edges:    # list<Edge>
 ```jsonc
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "Veritas logic-graph schema-4",
+  "title": "Veritas logic-graph schema-1",
   "type": "object",
   "required": ["schema", "nodes", "edges"],
   "properties": {
-    "schema": { "const": 4 },
+    "schema": { "const": 1 },
     "generated": { "type": "string" },
     "nodes": {
       "type": "array",
@@ -117,7 +117,7 @@ edges:    # list<Edge>
 ## 5 · Example
 
 ```yaml
-schema: 4
+schema: 1
 generated: auto-scan
 
 nodes:
@@ -134,7 +134,7 @@ edges:
     obligation: file_exists
   - from: artifact__proofs
     to: artifact__proofs
-    obligation: lean_compile
+    obligation: file_exists
 ```
 
 ---

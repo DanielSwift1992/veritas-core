@@ -1,0 +1,38 @@
+import json, pathlib, sys, textwrap
+from typer.testing import CliRunner
+import veritas.vertex.stats as vstats
+from veritas.vertex import _util
+from veritas.kernel import graph as kgraph
+from collections import Counter
+
+def _make_graph(nodes, edges):
+    return kgraph.Graph1(nodes, edges)
+
+def test_stats_empty_graph():
+    g = _make_graph({}, [])
+    res = vstats.analyse(g)
+    assert res["n_nodes"] == 0
+    assert res["n_edges"] == 0
+    assert res["diameter"] == "∞"
+
+
+def test_stats_single_node_self_edge():
+    g = _make_graph({"a": {"id": "a"}}, [{"from": "a", "to": "a", "obligation": "file_exists"}])
+    res = vstats.analyse(g)
+    assert res["n_nodes"] == 1
+    assert res["density"] == 0
+
+
+def test_render_stats_json(capsys):
+    stats = {"foo": 1}
+    _util.render_stats(stats, json_out=True, template=None, pretty=False)
+    out, _ = capsys.readouterr()
+    assert json.loads(out) == stats
+
+
+def test_render_stats_pretty(capsys):
+    stats = {"n_nodes": 0, "n_edges": 0, "density": 0, "diameter": "∞", "kinds": Counter(), "self_pct": 1.0, "cross_refs": 0}
+    _util.render_stats(stats, json_out=False, template=None, pretty=True)
+    out, _ = capsys.readouterr()
+    # pretty output should contain "Nodes:" line
+    assert "Nodes:" in out 

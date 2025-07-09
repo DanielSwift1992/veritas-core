@@ -1,9 +1,7 @@
 FROM ubuntu:22.04
 
 RUN apt-get update && \
-    apt-get install -y python3 python3-pip g++ curl git && \
-    curl -s https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | bash -s -- -y && \
-    echo "export PATH=$HOME/.elan/bin:$PATH" >> /etc/profile
+    apt-get install -y python3 python3-pip g++ curl git
 
 COPY . /delta
 WORKDIR /delta
@@ -13,4 +11,4 @@ RUN if [ -f artifact/code/requirements.txt ]; then \
         pip3 install -r artifact/code/requirements.txt; \
     fi
 
-CMD ["bash", "./build.sh"] 
+CMD ["veritas", "check", "--quiet", "--stats"] 

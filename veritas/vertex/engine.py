@@ -8,8 +8,8 @@ Responsibilities:
 Currently synchronous, but design allows future asyncio gather.
 """
 from __future__ import annotations
-import pathlib, sys
-from typing import Any
+import pathlib, sys, subprocess
+from typing import Any, Dict, List, Callable
 
 from .bus import publish
 from .plugin_api import discover_plugins
@@ -86,7 +86,8 @@ def run(cfg_path: str | pathlib.Path = "logic-graph.yml", *, collect_stats: bool
                 continue
             boundary = pathlib.Path(nodes[frm].get("boundary", ""))
             t0 = time.perf_counter()
-            res = plugin.run(boundary, cfg=edge)
+            meta = edge.get("meta", {})
+            res = plugin.run(boundary, cfg=meta, **meta)
             dt = time.perf_counter() - t0
             if profile:
                 timings.setdefault(check, 0.0)
@@ -153,6 +154,6 @@ def run(cfg_path: str | pathlib.Path = "logic-graph.yml", *, collect_stats: bool
         return summary
 
     # If graph could not be loaded, fail early --------------------------------
-    raise SystemExit(f"[veritas] {cfg_path} not found or invalid schema (expected schema=4)")
+    raise SystemExit(f"[veritas] {cfg_path} not found or invalid schema (expected schema=1)")
 
 # TODO(v1.1): replace sequential loop with asyncio.gather for >1k checks performance 
