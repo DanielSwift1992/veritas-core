@@ -13,6 +13,9 @@ class FileHash(BaseCheck):
         if path.is_dir():
             h = hashlib.sha256()
             for p in sorted(path.rglob("*")):
+                # Skip Python byte-code and cache dirs to ensure deterministic hash
+                if "__pycache__" in p.parts or p.suffix in {".pyc", ".pyo"}:
+                    continue
                 if p.is_file():
                     h.update(p.read_bytes())
             return h.hexdigest()
