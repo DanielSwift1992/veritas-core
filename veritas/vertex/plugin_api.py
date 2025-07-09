@@ -84,7 +84,13 @@ def discover_plugins() -> dict[str, type[BaseCheck]]:
     2. Inline @plugin-decorated classes within current process
     3. Source-tree modules under ``veritas.vertex.plugins`` (editable install)
     """
-    eps = {ep.name: ep.load() for ep in metadata.entry_points(group="veritas_plugins")}
+    eps: Dict[str, type[BaseCheck]] = {}
+    for ep in metadata.entry_points(group="veritas_plugins"):
+        try:
+            eps[ep.name] = ep.load()
+        except Exception:
+            # Ignore broken or missing plugins; core must stay functional without extras
+            continue
     local = _scan_local_plugins()
     # Inline decorators override nothing deliberately; entry-points win.
     combined = {**local, **_inline}
