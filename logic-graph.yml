@@ -1,4 +1,4 @@
-schema: 4
+schema: 1
 nodes:
   - id: core_pkg
     type: evidence
@@ -17,7 +17,7 @@ edges:
     to: spec_doc
     obligation: yaml_schema
     meta:
-      schema: docs/schema-4.json
+      schema: docs/schema-1.json
   - from: tests_dir
     to: tests_dir
     obligation: file_exists
