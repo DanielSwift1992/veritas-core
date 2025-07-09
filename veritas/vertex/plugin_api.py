@@ -9,13 +9,12 @@ from __future__ import annotations
 import sys, pathlib, importlib, pkgutil
 from typing import Protocol, Any, Dict, runtime_checkable, abstractmethod
 from importlib import metadata
+import os
+import importlib
+from pathlib import Path
 
 __all__ = ["CheckResult", "discover_plugins"]
 
-# ensure local path on sys.path for editable installs
-cwd = str(pathlib.Path().resolve())
-if cwd not in sys.path:
-    sys.path.insert(0, cwd)
 
 class CheckResult:
     """Uniform outcome returned by every plugin."""

@@ -1,7 +1,7 @@
 """veritas.engine – single execution engine.
 
 Responsibilities:
-1. Load logic-graph.yml (schema-4) → build in-memory graph.
+1. Load logic-graph.yml (schema-1) → build in-memory graph.
 2. Execute obligations via registered plugins.
 3. Publish events on bus (graph.built, check.completed).
 
@@ -15,6 +15,7 @@ from .bus import publish
 from .plugin_api import discover_plugins
 from ..kernel.graph import load as load_graph
 import hashlib, json, networkx as nx, time
+import yaml, importlib
 
 # Registry of built-in shell morphisms (fallback)
 _MORPHISMS: Dict[str, List[Callable[[dict[str, Any]], None]]] = {
@@ -62,8 +63,36 @@ def _resolve_plugin(name: str):
 
 # ---------------------------------------------------------------------------
 
+def _import_declared_plugins(cfg: str | pathlib.Path):
+    p = pathlib.Path(cfg)
+    if not p.exists():
+        return
+    try:
+        raw = yaml.safe_load(p.read_text()) or {}
+    except Exception:
+        return
+    for ident in raw.get("plugins", []):
+        if isinstance(ident, str):
+            if ident.startswith(('./', '../')):
+                pkg_path = pathlib.Path(ident).resolve()
+                if pkg_path.is_dir():
+                    sys.path.insert(0, str(pkg_path.parent))
+                    pkg_name = pkg_path.name
+                else:
+                    continue
+            else:
+                pkg_name = ident
+            try:
+                importlib.import_module(pkg_name.replace('/', '.'))
+            except ImportError:
+                print(f"[veritas] plugin package '{pkg_name}' not importable", file=sys.stderr)
+
+
 def run(cfg_path: str | pathlib.Path = "logic-graph.yml", *, collect_stats: bool = False, profile: bool = False) -> dict[str, Any]:
     """Execute checks; optionally return stats and timing info."""
+
+    # Import plugins declared in graph before full load
+    _import_declared_plugins(cfg_path)
 
     # Load v4 graph file ----------------------------------------------------
     graph = load_graph(cfg_path)
