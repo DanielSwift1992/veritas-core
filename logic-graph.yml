@@ -16,8 +16,6 @@ edges:
   - from: spec_doc
     to: spec_doc
     obligation: yaml_schema
-    meta:
-      schema: docs/schema-1.json
   - from: tests_dir
     to: tests_dir
     obligation: file_exists
