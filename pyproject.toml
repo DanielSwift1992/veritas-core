@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "veritas-core"
-dynamic = ["version"]
+version = "0.1.0"
 description = "Veritas — open trust protocol turning any digital promise into a verifiable obligation."
 readme = "README.md"
 requires-python = ">=3.10"
