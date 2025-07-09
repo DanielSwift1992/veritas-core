@@ -41,3 +41,6 @@ repo_concat.txt
 
 # Ignore plugin build artifacts
 *.egg-info/ 
+
+# Veritas lock
+whole.lock 
