@@ -33,6 +33,32 @@ graph TD
 ```
 
 ---
+## MDR: Flow + Dissipation (Core Theory)
+
+Veritas Core реализует MDR (Minimal Dissipative Reasoning):
+- **Flow** — поток намерений/обязательств по графу (edges: obligations).
+- **Dissipation** — контроль рассеивания/утраты доверия (циклы, self-checks, radius, entropy).
+
+Каждый edge — это поток (flow), а плагины могут реализовывать как проверки потока, так и контроль dissipation (например, radius_tracker, dissipation_check).
+
+MDR позволяет строить knowledge-base поверх ядра без изменений в core: все расширения — через плагины и граф.
+
+---
+## Dependencies & Extras
+
+- Минимальные зависимости: pyyaml
+- Опциональные (через extras):
+  - `networkx` — для анализа графа и stats (`pip install veritas-core[stats]`)
+  - `typer`, `rich` — для CLI (`pip install veritas-core[cli]`)
+  - `jinja2` — для шаблонов (`pip install veritas-core[templ]`)
+- Для тестов: `pytest` и extras `test`
+
+Пример:
+```bash
+pip install veritas-core[cli,stats]
+```
+
+---
 ## Verification status (auto-generated)
 <!-- STATUS-START -->
 <!-- STATUS-END -->
@@ -53,3 +79,11 @@ Plugins are regular Python packages that expose one or more classes decorated wi
 3. Run `veritas check` — the engine will `import my_checks` before discovering plugins; your obligation names become available immediately.
 
 See `docs/COOKBOOK.md` for plugin skeletons and recipes.
+
+---
+## Policy: Frozen Core
+
+- Ядро (veritas-core) заморожено с версии 1.0.0: только багфиксы, никаких новых фич.
+- Все расширения (новые проверки, интеграции, графы) — только через плагины (см. plugin_api, entry-points) и knowledge-base.
+- Любые изменения в core требуют отдельного VEP и одобрения steering committee.
+- Knowledge-base использует core как dependency, не меняя его исходный код.

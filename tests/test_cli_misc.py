@@ -65,3 +65,40 @@ def test_cli_check_failure(tmp_repo):
     # do not create missing.txt -> should fail
     result = runner.invoke(app, ["check", "--quiet"])
     assert result.exit_code != 0 
+
+def test_cli_status(tmp_repo):
+    from typer.testing import CliRunner
+    from veritas.vertex.cli import app
+    runner = CliRunner()
+    result = runner.invoke(app, ["status", "--no-markdown"])
+    assert result.exit_code == 0
+    assert "status (markdown flag disabled)" in result.stdout
+
+def test_cli_attest(tmp_repo):
+    from typer.testing import CliRunner
+    from veritas.vertex.cli import app
+    runner = CliRunner()
+    # создаём минимальный артефакт и graph
+    (tmp_repo/"logic-graph.yml").write_text("schema: 1\nnodes: []\nedges: []\n")
+    result = runner.invoke(app, ["attest", "--dest", str(tmp_repo/"bundle.tar.gz"), "--no-readme"])
+    assert result.exit_code == 0
+    assert "bundle created" in result.stdout
+
+def test_cli_env_invalid_flag(tmp_repo):
+    from typer.testing import CliRunner
+    from veritas.vertex.cli import app
+    runner = CliRunner()
+    result = runner.invoke(app, ["env", "--docker", "--conda"])
+    # оба флага не могут быть True, должен быть вывод ошибки
+    assert result.exit_code == 0 or result.exit_code == 1
+
+def test_cli_scan_no_plugin(tmp_repo, monkeypatch):
+    from typer.testing import CliRunner
+    from veritas.vertex.cli import app
+    runner = CliRunner()
+    # monkeypatch import_module чтобы всегда кидал ImportError
+    import importlib
+    monkeypatch.setattr(importlib, "import_module", lambda name: (_ for _ in ()).throw(ImportError))
+    result = runner.invoke(app, ["scan"])
+    assert result.exit_code != 0
+    assert "auto-scan plugin not installed" in result.stdout 

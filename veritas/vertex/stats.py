@@ -28,7 +28,13 @@ def analyse(graph, timings: Dict[str, float] | None = None) -> dict:
     elif G.number_of_nodes() == 1:
         diameter_val = 0
     else:
-        diameter_val = nx.diameter(G) if nx.is_weakly_connected(G) else "∞"
+        try:
+            diameter_val = nx.diameter(G) if nx.is_weakly_connected(G) else "∞"
+        except Exception:
+            diameter_val = "∞"
+    # ripple_score: descendants от первого узла (если есть)
+    root = next(iter(graph.nodes), None)
+    ripple_score = len(nx.descendants(G, root)) if root else 0
     stats: dict = {
         "n_nodes": G.number_of_nodes(),
         "n_edges": G.number_of_edges(),
@@ -37,6 +43,7 @@ def analyse(graph, timings: Dict[str, float] | None = None) -> dict:
         "kinds": kinds,
         "self_pct": self_edges / G.number_of_nodes() if G.number_of_nodes() else 1.0,
         "cross_refs": cross_refs,
+        "ripple_score": ripple_score,
     }
     if timings:
         stats["timings"] = dict(sorted(timings.items(), key=lambda x: x[1], reverse=True))

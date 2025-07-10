@@ -93,6 +93,33 @@ class ForbidImport(BaseCheck):
 ```
 ---
 
+## MDR: Flow + Dissipation
+
+- **Flow**: Проверка обязательств по графу (edges).
+- **Dissipation**: Контроль циклов, self-checks, radius, entropy через плагины.
+
+### Пример: Плагин для dissipation_check
+```python
+from veritas.vertex.plugin_api import BaseCheck, CheckResult
+class DissipationCheck(BaseCheck):
+    obligation = "dissipation_check"
+    def run(self, artifact, *, max_cycles=0, **kw):
+        # Пример: fail если в boundary-графе больше max_cycles циклов
+        import networkx as nx, yaml
+        g = nx.DiGraph()
+        data = yaml.safe_load(artifact.read_text())
+        g.add_nodes_from(n["id"] for n in data["nodes"])
+        g.add_edges_from((e["from"], e["to"]) for e in data["edges"])
+        try:
+            cycles = list(nx.simple_cycles(g))
+        except Exception:
+            return CheckResult.failed("graph parse error")
+        if len(cycles) > max_cycles:
+            return CheckResult.failed(f"too much dissipation: {len(cycles)} cycles")
+        return CheckResult.passed()
+```
+---
+
 ## Contributing new recipes
 
 1. Fork this repo and add a new `###` section following the pattern above.

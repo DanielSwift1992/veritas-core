@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "veritas-core"
-version = "0.1.2"
+version = "1.0.0"
 description = "Veritas — open trust protocol turning any digital promise into a verifiable obligation."
 readme = "README.md"
 requires-python = ">=3.10"
@@ -23,23 +23,17 @@ text = "MIT"
 veritas = "veritas.vertex.cli:app"
 
 [project.optional-dependencies]
-plugins = [
-    "veritas-pytest",
-    "veritas-guardian",
-    "veritas-cite",
-    "veritas-markdown"
-]
-
 stats = ["networkx>=3"]
 templ = ["jinja2>=3"]
 cli = ["typer>=0.9", "rich>=13"]
-test = ["typer>=0.9", "rich>=13", "networkx>=3", "pytest", "typer"]
+test = ["pytest", "networkx>=3", "typer>=0.9", "rich>=13"]
 
 [project.entry-points."veritas_plugins"]
 file_exists = "veritas.vertex.plugins.file_exists:FileExists"
 markdown_nonempty = "veritas.vertex.plugins.markdown_nonempty:MarkdownNonEmpty"
 yaml_schema = "veritas.vertex.plugins.yaml_schema:YamlSchema"
 file_hash = "veritas.vertex.plugins.file_hash:FileHash"
+mdr_dissipation = "veritas.vertex.plugins.mdr_dissipation:MDRDissipation"
 
 [tool.setuptools.packages.find]
 where = [ ".",]

@@ -80,6 +80,19 @@ If a string starts with `./` or `../` it is treated as a relative path; otherwis
 
 ---
 
+## MDR: Flow + Dissipation
+
+- **Flow**: Каждое ребро (edge) в графе — это поток обязательства (обещания, проверки).
+- **Dissipation**: Ядро и плагины могут реализовывать контроль рассеивания (например, cycles, self-checks, radius_tracker).
+- MDR — это минимальный набор инвариантов для доверия: engine гарантирует, что все потоки проверены, а рассеивание контролируется.
+
+---
+## MDR API в ядре
+- extract_subgraph(graph, uid, depth): возвращает подграф для навигации/расширений (используется kb).
+- mdr_dissipation: встроенный плагин, проверяет отсутствие циклов (dissipation=0).
+
+---
+
 ## 4 · Minimal JSON-Schema (excerpt)
 
 ```jsonc

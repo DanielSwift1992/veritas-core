@@ -31,6 +31,16 @@ def test_bus_subscribe_publish(capsys):
     assert collected == {"value": 42}
 
 
+def test_bus_listener_error(capsys):
+    from veritas.vertex import bus
+    def bad_listener(_):
+        raise RuntimeError("fail")
+    bus.subscribe("fail.topic", bad_listener)
+    bus.publish("fail.topic", {"x": 1})
+    out, err = capsys.readouterr()
+    assert "listener error" in err
+
+
 def test_file_hash_directory(tmp_path):
     d = tmp_path / "dir"
     d.mkdir()
