@@ -1,6 +1,6 @@
 # Evidence Matrix: From Kernel Properties to Quantifiable ROI
 
-*This document captures the cause-and-effect chain from low-level design choices in the Δ-Kernel up to board-level business outcomes.  Copy-paste any section into a white-paper, landing page or investor deck as needed.*
+*This document captures the cause-and-effect chain from low-level design choices in the Δ-Kernel up to board-level business outcomes. Copy-paste any section into a white-paper, landing page or investor deck as needed.*
 
 ---
 
@@ -13,6 +13,7 @@
 | *Plugins loaded via entry-points*                                    | any team can write its own checks in 30 lines            | domain experts extend Veritas without touching core |
 | *Graph file is regular YAML*                                         | editable in any IDE, diff-friendly                       | can be code-reviewed like source; no vendor lock-in |
 | *"Tuning completeness"* (add as much or as little edges as you like) | zero-friction incremental rollout                        | maturity model for adoption programmes              |
+| *MDR: Minimal Dissipative Reasoning*                                 | see [docs/MDR.md](MDR.md) for the core trust invariant   | all trust/flow/dissipation invariants unified       |
 
 ---
 
@@ -20,11 +21,11 @@
 
 | Role / job-to-be-done                                                            | Typical plugin mix (starter pack)                                          | Pain today                                          | KPI after Veritas                                                                                                |
 | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------- | --------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| **System / Solution Architect**<br>"My architecture diagram must stay true."     | • `forbidden_import`  • `openapi_spec_valid`  • `dockerfile_best_practice` | Docs drift, late discovery of dependency violations | *Mean time-to-violation-detect* ↓ from days ➜ minutes<br>*On-boarding time* ↓ 30 % (new hire runs `veritas ask`) |
+| **System / Solution Architect**<br>"My architecture diagram must stay true."     | • `forbidden_import`  • `openapi_spec_valid`  • `dockerfile_best_practice` | Docs drift, late discovery of dependency violations | *Mean time-to-violation-detect* ↓ from days → minutes<br>*On-boarding time* ↓ 30 % (new hire runs `veritas ask`) |
 | **DevOps / SRE**<br>"Pipelines should be declarative and portable."              | • `pytest`  • `bandit`  • `sbom_up_to_date`  • `trivy_scan`                | 2-3 parallel CI script dialects, flaky jobs         | *.gitlab-ci.yml* LoC ↓ > 90 %<br>*Time-to-green* ↓ 25–50 % (selective re-runs)                                   |
 | **Security / Compliance Officer**<br>"Prove GDPR & SOC-2 controls continuously." | • `check_encryption`  • `iam_policy_least_priv`  • `data_retention_window` | Spreadsheet audits, point-in-time evidence          | *Audit prep time* ↓ ×10<br>*Control coverage* ↑ to 100 % (each requirement = node)                               |
 | **Product Manager / CTO**<br>"I need a live risk & progress dashboard."          | same graph + `kpi_target_met` obligations                                  | Blind spots until after release                     | *Lead-time from spec to proof* compressed; live "trust-stamp" visible to stakeholders                            |
-| **Data-science Lead**<br>"My model pipeline must be reproducible."               | • `mlflow_model_exists`  • `dataset_version_pin`  • `notebook_execute`     | "works on my GPU", undetected data drift            | *Re-run success rate* → 100 %<br>*Drift detection latency* ↓ from weeks ➜ hours                                  |
+| **Data-science Lead**<br>"My model pipeline must be reproducible."               | • `mlflow_model_exists`  • `dataset_version_pin`  • `notebook_execute`     | "works on my GPU", undetected data drift            | *Re-run success rate* → 100 %<br>*Drift detection latency* ↓ from weeks → hours                                  |
 
 *(Add or drop rows to match the persona set you care about.)*
 
@@ -34,11 +35,11 @@
 
 ```text
 veritas-demo/
-├─ services/            # tiny micro-service dummy
-├─ infra/               # terraform sample
-├─ ml/                  # notebook + model.pkl
-├─ logic-graph.yml      # ≈ 40 nodes / 80 edges
-└─ README.md            # scenario description
+├── services/            # tiny micro-service dummy
+├── infra/               # terraform sample
+├── ml/                  # notebook + model.pkl
+├── logic-graph.yml      # ≈ 40 nodes / 80 edges
+└── README.md            # scenario description
 ```
 
 1. **Commit A** – deliberately break two obligations (e.g. outdated OpenAPI file, failing notebook).

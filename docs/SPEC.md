@@ -1,11 +1,8 @@
 # Veritas Contract Graph – Specification (schema = 1)
 
-> Status: **Draft / v0.1** – minimal guarantees sufficient for the reference Δ-Kernel demo.  
-> Approved by: core maintainers on 2025-07-04.  
-> Status: **Stable / v1.0** – canonical specification used by reference implementation.  
+> Status: **Stable / v1.0** – canonical specification used by the reference implementation.  
 > JSON-Schema: see `docs/schema-1.json`.  
-> Approved by: steering committee, 2025-07-10.  
-> See also: `docs/BRAND.md`, `docs/POSITIONING.md`, `docs/PHILOSOPHY.md`.
+> Approved by: steering committee, 2025-07-10.
 
 ---
 
@@ -37,19 +34,19 @@ edges:    # list<Edge>
 
 | Field     | Type | Required | Description |
 |-----------|------|----------|-------------|
-| `id`      | str  | ✔︎ | Globally unique identifier (stable across renames). |
-| `type`    | str  | ✔︎ | One of `evidence`, `claim`, `contract`. |
-| `boundary`| str  | – | Relative path (file/dir) that the node represents. |
-| `meta`    | dict | – | Arbitrary extra data reserved for plugins. |
+| `id`      | str  | ✓        | Globally unique identifier (stable across renames). |
+| `type`    | str  | ✓        | One of `evidence`, `claim`, `contract`. |
+| `boundary`| str  | –        | Relative path (file/dir) that the node represents. |
+| `meta`    | dict | –        | Arbitrary extra data reserved for plugins. |
 
 ### 2.2 Edge
 
 | Field         | Type | Required | Description |
 |---------------|------|----------|-------------|
-| `from`        | str  | ✔︎ | Source node `id`. |
-| `to`          | str  | ✔︎ | Target node `id`. |
-| `obligation`  | str  | ✔︎ | Name of a **check plugin** (e.g. `file_exists`, `pytest`). |
-| `meta`        | dict | – | Arbitrary data passed verbatim to plugin. |
+| `from`        | str  | ✓        | Source node `id`. |
+| `to`          | str  | ✓        | Target node `id`. |
+| `obligation`  | str  | ✓        | Name of a **check plugin** (e.g. `file_exists`, `pytest`). |
+| `meta`        | dict | –        | Arbitrary data passed verbatim to plugin. |
 
 ### 2.0 Plugins
 
@@ -68,28 +65,25 @@ If a string starts with `./` or `../` it is treated as a relative path; otherwis
 ## 3 · Graph Invariants
 
 1. **Uniqueness** – every `nodes[*].id` is unique.
-2. **Referential integrity** – `edges[*].from` and `edges[*].to` MUST reference
-   existing node ids.
-3. **Orphans** – nodes that are never referenced by any edge are reported as
-   warnings and mark the run as *failed* (engine's `orphan-lint`).
-4. **Cycles** – cycles are disallowed and cause failure, except **self-edges**
-   (`from == to`) which are explicitly **allowed** to express reflexive
-   obligations (evidence self-check).
-5. **Determinism** – identical graphs (after key-ordering) must yield identical
-   `whole.lock` trust-stamps.
+2. **Referential integrity** – `edges[*].from` and `edges[*].to` MUST reference existing node ids.
+3. **Orphans** – nodes that are never referenced by any edge are reported as warnings and mark the run as *failed* (engine's `orphan-lint`).
+4. **Cycles** – cycles are disallowed and cause failure, except **self-edges** (`from == to`) which are explicitly **allowed** to express reflexive obligations (evidence self-check).
+5. **Determinism** – identical graphs (after key-ordering) must yield identical `whole.lock` trust-stamps.
 
 ---
-
 ## MDR: Flow + Dissipation
 
-- **Flow**: Каждое ребро (edge) в графе — это поток обязательства (обещания, проверки).
-- **Dissipation**: Ядро и плагины могут реализовывать контроль рассеивания (например, cycles, self-checks, radius_tracker).
-- MDR — это минимальный набор инвариантов для доверия: engine гарантирует, что все потоки проверены, а рассеивание контролируется.
+MDR is the core trust invariant in Veritas: every obligation (flow) must be checked, and dissipation (cycles, entropy) must be controlled. For the full theory and mathematical background, see [docs/MDR.md](MDR.md).
+
+- **Flow**: Each edge in the graph is a flow of obligation (promise, check).
+- **Dissipation**: The core and plugins can implement dissipation control (e.g., cycles, self-checks, `radius_tracker`).
+- MDR is the minimal set of invariants for trust: the engine guarantees all flows are checked and dissipation is controlled.
 
 ---
-## MDR API в ядре
-- extract_subgraph(graph, uid, depth): возвращает подграф для навигации/расширений (используется kb).
-- mdr_dissipation: встроенный плагин, проверяет отсутствие циклов (dissipation=0).
+## MDR API in the Core
+
+- `extract_subgraph(graph, uid, depth)`: returns a subgraph for navigation/extensions (used by kb).
+- `mdr_dissipation`: built-in plugin, checks for absence of cycles (dissipation=0).
 
 ---
 
@@ -167,15 +161,11 @@ edges:
 ## 6 · Versioning Policy
 
 * The **major** number of `schema` increases on breaking changes.
-* Fields may be added in a **minor** release if they are optional and guarded
-  by `additionalProperties: false`.
+* Fields may be added in a **minor** release if they are optional and guarded by `additionalProperties: false`.
 * Deprecations must live for ≥1 minor release before removal.
 
 ---
 
 ## 7 · Open Governance
 
-Evolution of the specification is tracked via **VEP** (Veritas Enhancement
-Proposal) documents stored in `docs/vep/` and decided by the steering
-committee (≤ 5 members).  The reference implementation (this repo) MUST stay
-compatible with the canonical JSON-Schema. 
+Evolution of the specification is tracked via **VEP** (Veritas Enhancement Proposal) documents stored in `docs/vep/` and decided by the steering committee (≤ 5 members). The reference implementation (this repo) MUST stay compatible with the canonical JSON-Schema. 

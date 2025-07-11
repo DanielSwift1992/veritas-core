@@ -1,5 +1,7 @@
 # Veritas Core
 
+[![PyPI version](https://img.shields.io/pypi/v/veritas-core.svg?style=flat-square)](https://pypi.org/project/veritas-core/)
+
 Minimal reference implementation of the Veritas contract graph engine.
 
 ---
@@ -9,12 +11,13 @@ pip install veritas-core
 ```
 
 ---
-## CLI Overview
+## Quickstart
+
 ```bash
-# verify repository that contains logic-graph.yml
+# Verify a repository that contains logic-graph.yml
 veritas check --stats --quiet
 
-# ask engine for graph metrics
+# Ask the engine for graph metrics
 veritas ask --json
 ```
 
@@ -35,25 +38,27 @@ graph TD
 ---
 ## MDR: Flow + Dissipation (Core Theory)
 
-Veritas Core реализует MDR (Minimal Dissipative Reasoning):
-- **Flow** — поток намерений/обязательств по графу (edges: obligations).
-- **Dissipation** — контроль рассеивания/утраты доверия (циклы, self-checks, radius, entropy).
+Veritas Core implements MDR (Minimal Dissipative Reasoning):
+- **Flow** — the flow of obligations through the graph (edges: obligations).
+- **Dissipation** — control of trust loss/entropy (cycles, self-checks, radius, entropy).
 
-Каждый edge — это поток (flow), а плагины могут реализовывать как проверки потока, так и контроль dissipation (например, radius_tracker, dissipation_check).
+Each edge is a flow; plugins can implement both flow checks and dissipation control (e.g., `radius_tracker`, `mdr_dissipation`).
 
-MDR позволяет строить knowledge-base поверх ядра без изменений в core: все расширения — через плагины и граф.
+**Why MDR?** MDR is the minimal invariant for trust in contract graphs: every obligation (flow) must be checked, and dissipation (cycles, entropy) must be controlled. For the full theory and mathematical background, see [docs/MDR.md](docs/MDR.md).
+
+MDR allows building a knowledge-base on top of the core without modifying it: all extensions are via plugins and the graph.
 
 ---
 ## Dependencies & Extras
 
-- Минимальные зависимости: pyyaml
-- Опциональные (через extras):
-  - `networkx` — для анализа графа и stats (`pip install veritas-core[stats]`)
-  - `typer`, `rich` — для CLI (`pip install veritas-core[cli]`)
-  - `jinja2` — для шаблонов (`pip install veritas-core[templ]`)
-- Для тестов: `pytest` и extras `test`
+- Minimal required dependency: `pyyaml`
+- Optional (via extras):
+  - `networkx` — for graph analysis and stats (`pip install veritas-core[stats]`)
+  - `typer`, `rich` — for CLI (`pip install veritas-core[cli]`)
+  - `jinja2` — for templating (`pip install veritas-core[templ]`)
+- For tests: `pytest` and the `test` extra
 
-Пример:
+Example:
 ```bash
 pip install veritas-core[cli,stats]
 ```
@@ -66,7 +71,9 @@ pip install veritas-core[cli,stats]
 ---
 © 2024 The Veritas Project – MIT License
 
+---
 ## Adding custom plugins
+
 Plugins are regular Python packages that expose one or more classes decorated with `@plugin("name")` (see `veritas.vertex.plugin_api.plugin`).
 
 1. Place your package next to the graph *or* install it via pip.
@@ -83,7 +90,7 @@ See `docs/COOKBOOK.md` for plugin skeletons and recipes.
 ---
 ## Policy: Frozen Core
 
-- Ядро (veritas-core) заморожено с версии 1.0.0: только багфиксы, никаких новых фич.
-- Все расширения (новые проверки, интеграции, графы) — только через плагины (см. plugin_api, entry-points) и knowledge-base.
-- Любые изменения в core требуют отдельного VEP и одобрения steering committee.
-- Knowledge-base использует core как dependency, не меняя его исходный код.
+- The core (`veritas-core`) is frozen as of version 1.0.0: only bugfixes, no new features.
+- All extensions (new checks, integrations, graph types) must be implemented via plugins (see plugin_api, entry-points) and the knowledge-base.
+- Any changes to the core require a separate VEP and approval by the steering committee.
+- The knowledge-base uses the core as a dependency, without modifying its source code.
