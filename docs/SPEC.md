@@ -154,6 +154,9 @@ edges:
   - from: artifact__proofs
     to: artifact__proofs
     obligation: file_exists
+  - from: artifact__code
+    to: artifact__proofs
+    obligation: mdr_dissipation
 ```
 
 ---

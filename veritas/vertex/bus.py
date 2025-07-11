@@ -24,4 +24,6 @@ def publish(topic: str, payload: dict) -> None:  # noqa: D401
         try:
             fn(deepcopy(payload))
         except Exception as exc:  # pragma: no cover – errors swallowed
-            print(f"[bus] listener error on {topic}: {exc}", file=sys.stderr) 
+            print(f"[bus] listener error on {topic}: {exc}", file=sys.stderr)
+
+__all__ = ["subscribe", "publish"] 

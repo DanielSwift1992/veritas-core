@@ -41,6 +41,16 @@ def test_bus_listener_error(capsys):
     assert "listener error" in err
 
 
+def test_bus_error_handling(capsys):
+    from veritas.vertex import bus
+    def bad_listener(_):
+        raise Exception("fail")
+    bus.subscribe("err.topic", bad_listener)
+    bus.publish("err.topic", {"foo": 1})
+    out, err = capsys.readouterr()
+    assert "listener error" in err
+
+
 def test_file_hash_directory(tmp_path):
     d = tmp_path / "dir"
     d.mkdir()
