@@ -23,6 +23,8 @@ def check(
     pretty: bool = typer.Option(False, "--pretty", help="Force pretty human text even in CI"),
     template: pathlib.Path | None = typer.Option(None, "--template", help="Render stats via Jinja2 template"),
     profile: bool = typer.Option(False, "--profile", help="Measure plugin timings"),
+    concurrency: str = typer.Option("1", "--concurrency", help="Number of workers or 'auto'"),
+    fail_fast: bool = typer.Option(False, "--fail-fast", help="Stop planning next levels after first failure"),
 ) -> None:
     """Run verification via engine then (optionally) update status."""
 
@@ -42,9 +44,9 @@ def check(
     if quiet:
         buf_out, buf_err = io.StringIO(), io.StringIO()
         with contextlib.redirect_stdout(buf_out), contextlib.redirect_stderr(buf_err):
-            summary = engine_run(collect_stats=stats, profile=profile)
+            summary = engine_run(collect_stats=stats, profile=profile, concurrency=(concurrency if concurrency=="auto" else int(concurrency)), fail_fast=fail_fast)
     else:
-        summary = engine_run(collect_stats=stats, profile=profile)
+        summary = engine_run(collect_stats=stats, profile=profile, concurrency=(concurrency if concurrency=="auto" else int(concurrency)), fail_fast=fail_fast)
 
     # Print binary summary line
     ok = summary.get("checks_failed", 0) == 0

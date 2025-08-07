@@ -89,6 +89,10 @@ See `docs/COOKBOOK.md` for plugin skeletons and recipes.
 
 ---
 ## Policy: Frozen Core
+-
+## Async execution (preview)
+
+The core runs checks sequentially by default for maximal determinism. For large graphs with independent edges, a level-by-level concurrent strategy is available. See `docs/ASYNC.md` for details. Final status (trust-stamp) is emitted only after all checks complete; logs are aggregated in a stable order. A production example using Veritas plugins and graph can be seen here: `https://github.com/DanielSwift1992/veritas-black-hole-article`.
 
 - The core (`veritas-core`) is frozen as of version 1.0.0: only bugfixes, no new features.
 - All extensions (new checks, integrations, graph types) must be implemented via plugins (see plugin_api, entry-points) and the knowledge-base.

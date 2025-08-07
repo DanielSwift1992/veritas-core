@@ -1,26 +1,41 @@
 schema: 1
 nodes:
-  - id: core_pkg
-    type: evidence
-    boundary: veritas
-  - id: spec_doc
-    type: evidence
-    boundary: docs/SPEC.md
-  - id: tests_dir
-    type: evidence
-    boundary: tests
+- id: core_pkg
+  type: evidence
+  boundary: veritas
+- id: spec_doc
+  type: evidence
+  boundary: docs/SPEC.md
+- id: tests_dir
+  type: evidence
+  boundary: tests
+- id: schema-1
+  type: evidence
+  boundary: docs/schema-1.json
+- id: evidence_matrix
+  type: evidence
+  boundary: docs/EVIDENCE_MATRIX.md
+- id: mdr
+  type: evidence
+  boundary: docs/MDR.md
+- id: cookbook
+  type: evidence
+  boundary: docs/COOKBOOK.md
+- id: index
+  type: evidence
+  boundary: docs/INDEX.yml
 edges:
-  - from: core_pkg
-    to: core_pkg
-    obligation: file_exists
-  - from: spec_doc
-    to: spec_doc
-    obligation: markdown_nonempty
-  - from: tests_dir
-    to: tests_dir
-    obligation: file_exists
-  - from: core_pkg
-    to: core_pkg
-    obligation: file_hash
-    meta:
-      expected: 01d5ce55baf8611f539d7636879df53fe81f4eaf69f7c6331f581dac750227a4
+- from: core_pkg
+  to: core_pkg
+  obligation: file_exists
+- from: spec_doc
+  to: spec_doc
+  obligation: markdown_nonempty
+- from: tests_dir
+  to: tests_dir
+  obligation: file_exists
+- from: core_pkg
+  to: core_pkg
+  obligation: file_hash
+  meta:
+    expected: 01d5ce55baf8611f539d7636879df53fe81f4eaf69f7c6331f581dac750227a4
