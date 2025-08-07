@@ -47,6 +47,14 @@ edges:    # list<Edge>
 | `to`          | str  | ✓        | Target node `id`. |
 | `obligation`  | str  | ✓        | Name of a **check plugin** (e.g. `file_exists`, `pytest`). |
 | `meta`        | dict | –        | Arbitrary data passed verbatim to plugin. |
+#### 2.3 Meta Canonicalization
+
+`meta` MUST be JSON-serializable. To ensure deterministic hashing and reproducible runs:
+
+- Floating-point values are **forbidden** in `meta`. Use strings with fixed precision (e.g. "1.2345") or integer encodings.
+- Dictionaries are canonicalized by sorting keys; arrays preserve order.
+- Plugins SHOULD treat `cfg` deterministically and avoid reading ambient state.
+
 
 ### 2.0 Plugins
 
@@ -67,7 +75,7 @@ If a string starts with `./` or `../` it is treated as a relative path; otherwis
 1. **Uniqueness** – every `nodes[*].id` is unique.
 2. **Referential integrity** – `edges[*].from` and `edges[*].to` MUST reference existing node ids.
 3. **Orphans** – nodes that are never referenced by any edge are reported as warnings and mark the run as *failed* (engine's `orphan-lint`).
-4. **Cycles** – cycles are disallowed and cause failure, except **self-edges** (`from == to`) which are explicitly **allowed** to express reflexive obligations (evidence self-check).
+4. **Cycles** – cycles are disallowed and cause failure, except **self-edges** (`from == to`) which are explicitly **allowed** to express reflexive obligations (evidence self-check). Execution MAY be parallelized across independent levels of the DAG; the final status is computed only after all scheduled checks finish. Edges skipped due to fail-fast are reported in the summary as `skipped`.
 5. **Determinism** – identical graphs (after key-ordering) must yield identical `whole.lock` trust-stamps.
 
 ---
