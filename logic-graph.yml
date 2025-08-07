@@ -38,4 +38,7 @@ edges:
   to: core_pkg
   obligation: file_hash
   meta:
-    expected: 01d5ce55baf8611f539d7636879df53fe81f4eaf69f7c6331f581dac750227a4
+    expected: e764b2590408e61ca969e8a16a2893eb4724e5de4df3bfaa3fb3c50f9b7186a3
+- from: spec_doc
+  to: schema-1
+  obligation: yaml_schema
