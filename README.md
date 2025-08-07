@@ -1,13 +1,11 @@
 # Veritas Core
 
-[![PyPI version](https://img.shields.io/pypi/v/veritas-core.svg?style=flat-square)](https://pypi.org/project/veritas-core/)
-
 Minimal reference implementation of the Veritas contract graph engine.
 
 ---
-## Install
+## Install (from source)
 ```bash
-pip install veritas-core
+pip install .[cli,stats]
 ```
 
 ---
